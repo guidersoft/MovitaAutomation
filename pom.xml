@@ -39,5 +39,44 @@
             <artifactId>cucumber-testng</artifactId>
             <version>7.11.2</version>
         </dependency>
+        <!-- annotationslarlar getter, setter gibi standart islemleri yapabilmek icin lombok kullanilir -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+        </dependency>
+
+        <!-- extent report icin adaptör -->
+        <!-- Runner'da plugin'e
+             "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+             eklenir
+             ayrica, test/resources altinda extent.properties olmalidir
+         -->
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extentreports-cucumber7-adapter</artifactId>
+            <version>1.10.1</version>
+        </dependency>
+
+        <!-- for YAML -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>2.10.3</version>
+        </dependency>
+
+        <!-- for YAML -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
     </dependencies>
 </project>
