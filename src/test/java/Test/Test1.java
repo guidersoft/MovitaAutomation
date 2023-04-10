@@ -1,14 +1,7 @@
 package Test;
 
 import Base.BaseMovita;
-import Locaators.Locator;
-import Utilities.Browsers;
-import Utilities.Driver;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
-
-import java.time.Duration;
 
 public class Test1 extends BaseMovita {
 
@@ -22,7 +15,7 @@ public class Test1 extends BaseMovita {
     public void logo(){
         click(llogo);
         bekle(3000);
-        visible(lMobilVasıta);
+        visible(lMobilVasita);
 
         //assertElement(lMobilVasıta,str);
 
@@ -49,7 +42,7 @@ public class Test1 extends BaseMovita {
     @Test(priority = 4,dependsOnMethods = "openMovita")
     public void homePage(){
         hoverOver(homePageMenu("Ana Sayfa"),"Ana Sayfa");
-        visible(lMobilVasıta);
+        visible(lMobilVasita);
 
     }
     @Test(priority = 5,dependsOnMethods = "openMovita")
