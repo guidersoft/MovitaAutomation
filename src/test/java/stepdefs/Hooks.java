@@ -1,13 +1,13 @@
 package stepdefs;
 
-
-import io.cucumber.java.Before;
+import Utilities.Driver;
+import io.cucumber.java.After;
 
 public class Hooks {
 
-@Before()
-public void before(){
-
-}
+    @After(order=0)
+    public void after0(){
+        Driver.quitDriver();
+    }
 
 }
