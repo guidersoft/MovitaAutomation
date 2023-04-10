@@ -6,6 +6,7 @@ import Utilities.Driver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -19,8 +20,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class BaseMovita implements Locator {
-    protected  WebDriver driver;
-    protected  WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
     {
         driver = Driver.getDriver();
@@ -46,6 +47,7 @@ public class BaseMovita implements Locator {
     public void visible(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
     public void visible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -72,8 +74,8 @@ public class BaseMovita implements Locator {
 
     public void getScreenshot(String name) {
 
-        String isim = "screenShots/" + name + " " + LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("dd_MM_yyyy")) + ".png";
+        String isim = "test-output/screenShots/" + name + " " + LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("dd_MM_yyyy HH-mm-ss")) + ".png";
 
         TakesScreenshot takesScreenshot = ((TakesScreenshot) driver);
 
@@ -87,15 +89,17 @@ public class BaseMovita implements Locator {
         }
 
     }
-    public void hoverOver(WebElement element,String text){
+
+    public void hoverOver(WebElement element, String text) {
         new Actions(driver)
                 .moveToElement(element)
                 .click(homePageMenu(text))
                 .build()
                 .perform();
     }
-    public void hoverAll(By locator){
-        List<WebElement> list=driver.findElements(locator);
+
+    public void hoverAll(By locator) {
+        List<WebElement> list = driver.findElements(locator);
 
         for (WebElement element : list) {
             new Actions(driver)
@@ -111,6 +115,30 @@ public class BaseMovita implements Locator {
         WebElement element = driver.findElement(By.xpath("//ul[@class='menu-container']//div[text()='" + text + "']"));
 
         return element;
+    }
 
+
+    public void assertChangeColor(WebElement element, String color) {
+        String bgColorRGB = element.getCssValue("color");
+        String bgColorHex = Color.fromString(bgColorRGB).asHex();
+        Assert.assertEquals(bgColorHex, color);
+    }
+
+    public void assertChangeColor(By locator, String color) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        assertChangeColor(element, color);
+    }
+
+    public void hoverOverByAction(WebElement element) {
+        new Actions(driver)
+                .moveToElement(element)
+                .pause(500)
+                .build()
+                .perform();
+    }
+
+    public void hoverOverByAction(By locator) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        hoverOverByAction(element);
     }
 }

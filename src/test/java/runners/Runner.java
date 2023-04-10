@@ -7,8 +7,9 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         //features = {"c:/features"},                   // feature'lar genellikle test/resources altinda olur
-        features = {"src/main/resources/features/Automation_AnaSayfa_Mumin.feature"},         // feature yolu alinirken content rootdan baslanir
+        features = {"src/test/resources/features/yusuf/Movita_Homepage_TopMenu.feature"},         // feature yolu alinirken content rootdan baslanir
         glue = {"stepdefs"},       // glue'lar, stepdefs ve hooks classlarinin yeridir, sourceroot'dan baslar
+        tags = "@Language",
         dryRun = false           // sadece step defsler düzgün hazirlanmismi, yapilandirma uygun mu
         /*tags = "@login",         // @login tagli senaryolar calistirilin
         plugin = {"pretty",
