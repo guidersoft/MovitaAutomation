@@ -1,4 +1,4 @@
-package utils;
+package Utilities;
 
 import java.io.FileReader;
 import java.util.Properties;

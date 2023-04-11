@@ -1,0 +1,13 @@
+{
+  "navigate to": {
+    "url": "https://movita.com.tr/",
+    "username": "demomovita",
+    "password": "1192movita"
+  },
+  "Homepage": {
+    "movita logo": {
+      "type": "xpath",
+      "locator": "//a[@class='standard-logo']"
+    }
+  }
+}

@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -19,28 +20,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class BaseMovita implements Locator {
-    private  WebDriver driver;
-    private  WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
-    @BeforeTest
-    @Parameters("browser")
-    public void beforeTest(@Optional("CHROME") String browser) {
-        driver = Driver.getDriver(Browsers.valueOf(browser));
+    {
+
+        driver = Driver.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
 
-    @AfterTest
-    public void afterTest() {
-        Driver.quitDriver();
-    }
 
-
-
-   /*   public BaseMovita() {
-          driver=Driver.getDriver();
-          wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-      }*/
+    /*   public BaseMovita() {
+           driver=Driver.getDriver();
+           wait=new WebDriverWait(driver,Duration.ofSeconds(10));
+       }*/
     /*{
         driver=Driver.getDriver();
         wait=new WebDriverWait(driver,Duration.ofSeconds(10));
@@ -56,13 +50,33 @@ public class BaseMovita implements Locator {
     }
 
     public void click(WebElement element) {
-        element.click();
+        wait.until(driver -> {
+            try {
+                element.click();
+                return true;
+            } catch (Exception e1) {
 
+                try {
+                    new Actions(driver).moveToElement(element).click().perform();
+                    return true;
+                } catch (Exception e2) {
+
+                    try {
+                        ((JavascriptExecutor) driver).executeScript("arguments(0).click", element);
+                        return true;
+                    } catch (Exception e3) {
+                        return false;
+                    }
+                }
+
+            }
+        });
     }
 
     public void visible(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
     public void visible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -104,15 +118,17 @@ public class BaseMovita implements Locator {
         }
 
     }
-    public void hoverOver(WebElement element,String text){
+
+    public void hoverOver(WebElement element, String text) {
         new Actions(driver)
                 .moveToElement(element)
                 .click(homePageMenu(text))
                 .build()
                 .perform();
     }
-    public void hoverAll(By locator){
-        List<WebElement> list=driver.findElements(locator);
+
+    public void hoverAll(By locator) {
+        List<WebElement> list = driver.findElements(locator);
 
         for (WebElement element : list) {
             new Actions(driver)
@@ -129,5 +145,11 @@ public class BaseMovita implements Locator {
 
         return element;
 
+    }
+
+    public WebElement anasayfaMenuContainer(By locator, String text) {
+        By lAnaSayfa = By.xpath("//ul[@class='menu-container']//div[text()=" + text + "]");
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return element;
     }
 }
