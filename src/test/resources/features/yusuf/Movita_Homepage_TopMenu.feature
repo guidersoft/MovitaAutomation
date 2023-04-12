@@ -1,7 +1,7 @@
 Feature: top menu
 
   @TopMenu
-  Scenario Outline: Verify topMenu functionality
+  Scenario Outline: Verify topMenu "<mainLink>" functionality
     Given users navigate to "https://movita.com.tr//"
     When  user hover over "<mainLink>"
     And   user assert change color of "<mainLink>"
@@ -17,7 +17,7 @@ Feature: top menu
       | İLETİŞİM           | https://movita.com.tr/iletisim           |
 
   @SubMenu
-  Scenario Outline: Verify topMenu_subMenu functionality
+  Scenario Outline: Verify topMenu_subMenu "<mainLink>"_"<subLink>" functionality
     Given users navigate to "https://movita.com.tr//"
     When  user hover over "<mainLink>"
     And   user assert change color of "<mainLink>"
