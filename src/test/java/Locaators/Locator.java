@@ -23,4 +23,6 @@ public interface Locator {
     By lTextOfMobilVasıtaİzlemeTakipSistemi = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil')]");
 
 
+
+
 }
