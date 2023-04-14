@@ -3,6 +3,7 @@ package Base;
 import Locaators.Locator;
 import Utilities.Browsers;
 import Utilities.Driver;
+import io.cucumber.messages.types.Exception;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -154,17 +155,17 @@ public class BaseMovita implements Locator {
                 element.clear();
                 element.sendKeys(text);
                 return true;
-            } catch (Exception e1) {
+            } catch (java.lang.Exception e1) {
                 try {
                     element.clear();
                     new Actions(driver1).moveToElement(element).sendKeys(text).perform();
                     return true;
-                } catch (Exception e2) {
+                } catch (java.lang.Exception e2) {
                     try {
                         element.clear();
                         ((JavascriptExecutor) driver1).executeScript("arguments[0].value='" + text + "'", element);
                         return true;
-                    } catch (Exception e3) {
+                    } catch (java.lang.Exception e3) {
                         return false;
                     }
                 }

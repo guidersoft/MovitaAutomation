@@ -71,8 +71,8 @@ public class MovitaStepdefs extends BaseMovita{
 
     @Then("user sees {string} on Page")
     public void userSeesOnPage(String text) {
-        visible(lTextOfMobilVasıtaİzlemeTakipSistemi);
-        Assert.assertTrue(driver.findElement(lTextOfMobilVasıtaİzlemeTakipSistemi).getText().contains(text));
+        visible(lTextOfMobilVasitaIzlemeTakipSistemi);
+        Assert.assertTrue(driver.findElement(lTextOfMobilVasitaIzlemeTakipSistemi).getText().contains(text));
     }
 
 

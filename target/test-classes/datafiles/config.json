@@ -1,0 +1,39 @@
+{
+  "url": "https://movita.com.tr/",
+  "username": "demomovita",
+  "password": "1192movita",
+  "takescreenshot": true,
+  "takescreenshotOn": "fail",
+  "users": [
+    {
+      "type": "user",
+      "valid": true,
+      "username": "demomovita",
+      "password": "1192movita"
+    },
+    {
+      "type": "user",
+      "valid": false,
+      "username": "movita",
+      "password": "movita"
+    },
+    {
+      "type": "user",
+      "valid": false,
+      "username": "",
+      "password": "1192movita"
+    },
+    {
+      "type": "user",
+      "valid": false,
+      "username": "demomovita",
+      "password": ""
+    },
+    {
+      "type": "user",
+      "valid": false,
+      "username": "",
+      "password": ""
+    }
+  ]
+}
