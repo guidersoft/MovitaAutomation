@@ -25,6 +25,7 @@ Background: navigate url
     And   user String verify English → “Mobile Vehicle Tracking System” yazisini verify et
 
 
-    Scenario: homepage
+   Scenario Outline:  homepage
       When users hover over the homepage title
       And homepage should be clickable
+     Then user String verify Türkce → “Mobil Vasita izleme takip Sistemi” yazisini verify et

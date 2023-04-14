@@ -9,21 +9,19 @@ import java.util.Properties;
     public class PropertyReader {
 
         Properties prop = new Properties();
-        FileReader fileReader;
-        FileWriter fileWriter;
         String file;
 
-        public static PropertyReader propertyReader(){
-            return propertyReader("config");
+        public static PropertyReader read() {
+            return read("config");
         }
 
-        public static PropertyReader propertyReader(String fileName){
+        public static PropertyReader read(String fileName) {
             return new PropertyReader(fileName);
         }
 
-        private PropertyReader(String fileName){
+        public PropertyReader(String fileName) {
             try {
-                this.file = "src/test/resources/datafiles/" + fileName + ".properties";
+                file = "src/test/resources/datafiles/" + fileName + ".properties";
                 FileReader fileReader = new FileReader(file);
                 prop.load(fileReader);
             } catch (IOException e) {
@@ -32,27 +30,27 @@ import java.util.Properties;
 
         }
 
-        public String get(String key){
+        public String get(String key) {
             return prop.getProperty(key);
         }
 
 
-        public void set(String key, String value){
+        public void set(String key, String value) {
             prop.setProperty(key, value);
         }
 
 
-        public void del(String key){
+        public void del(String key) {
             prop.remove(key);
         }
 
-        public void store(String comment){
+        public void store(String comment) {
             try {
-                fileWriter = new FileWriter(file);
+                FileWriter fileWriter = new FileWriter(file);
                 prop.store(fileWriter, comment);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
     }
+
