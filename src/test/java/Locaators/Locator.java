@@ -26,7 +26,7 @@ public interface Locator {
     By lLoginFormSubmitButton = By.xpath("//form//button[@type='submit']");
     By lLoginFormUsernameWarningMessage = By.xpath("//div[contains(text(),'Lütfen kullanıcı adı girin!')]");
     By lLoginFormPasswordWarningMessage = By.xpath("//div[contains(text(),'Lütfen şifre girin!')]");
-    By lLoginFormInvalidUsernamePasswordWarningMessage = By.xpath("//div[contains(text(),'Lütfen kullanıcı adınızı veya şifrenizi doğru girdinizden emin olunuz')]");
+    By lLoginFormInvalidUsernamePasswordWarningMessage = By.xpath("//div[@class='toast-message']");
     By lDemoFileDropdownMenuLogout = By.xpath("//a[contains(.,' Çıkış Yap')]");
     By lDemoFileDropdownMenu = By.xpath("//a[contains(.,'Demo Filo (129)')]");
 

@@ -6,7 +6,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-
+import org.testng.annotations.DataProvider;
+import readers.MyPojo;
+import readers.json.ConfigJsonPojo;
+import java.util.List;
 import java.util.Map;
 
 
@@ -55,9 +58,78 @@ public class MovitaLoginStepdefs extends BaseMovita {
                 visible(lLoginFormPasswordWarningMessage);
             } else {
                 visible(lLoginFormInvalidUsernamePasswordWarningMessage);
+                System.out.println(driver.findElement(lLoginFormInvalidUsernamePasswordWarningMessage).getText());
             }
         }
 
+    }
+
+
+    @Then("user try to login with credential given in excel file name as {string}")
+    public void userTryToLoginWithCredentialGivenInExcelFileNameAs(String fileName) {
+        String file = "src/test/resources/datafiles/" + fileName;
+        List<String> username = getExcelColValuesOf(file,0,1);
+        List<String> password = getExcelColValuesOf(file, 0, 2);
+        List<String> success = getExcelColValuesOf(file, 0, 3);
+        for (int i = 0; i < username.size(); i++) {
+            sendKeys(lLoginFormUsername, username.get(i));
+            sendKeys(lLoginFormPassword, password.get(i));
+            click(lLoginFormSubmitButton);
+
+            if (success.get(i).equalsIgnoreCase("true")) {
+                click(lDemoFileDropdownMenu);
+                click(lDemoFileDropdownMenuLogout);
+            }
+
+            if (success.get(i).equalsIgnoreCase("false")) {
+                if (username.get(i).equalsIgnoreCase("") && password.get(i).equalsIgnoreCase("")) {
+                    visible(lLoginFormUsernameWarningMessage);
+                    visible(lLoginFormPasswordWarningMessage);
+                } else if (username.get(i).equalsIgnoreCase("")) {
+                    visible(lLoginFormUsernameWarningMessage);
+                } else if (password.get(i).equalsIgnoreCase("")) {
+                    visible(lLoginFormPasswordWarningMessage);
+                } else {
+                    visible(lLoginFormInvalidUsernamePasswordWarningMessage);
+                }
+            }
+        }
+    }
+
+    @Then("user try to login with credential given in yaml file name as {string}")
+    public void userTryToLoginWithCredentialGivenInYamlFileNameAs(String fileName) {
+        String file = "src/test/resources/datafiles/" + fileName;
+    }
+
+    @Then("user try to login with credential given in json file name as {string}")
+    public void userTryToLoginWithCredentialGivenInJsonFileNameAs(String fileName) {
+        String file = "src/test/resources/datafiles/" + fileName;
+        MyPojo pojo = new ConfigJsonPojo();
+        List<ConfigJsonPojo.User> users = ((ConfigJsonPojo) getPojo(file, pojo)).getUsers();
+
+        for (int i = 0; i < users.size(); i++) {
+            sendKeys(lLoginFormUsername, users.get(i).getUsername());
+            sendKeys(lLoginFormPassword, users.get(i).getPassword());
+            click(lLoginFormSubmitButton);
+
+            if (users.get(i).getValid().equalsIgnoreCase("true")) {
+                click(lDemoFileDropdownMenu);
+                click(lDemoFileDropdownMenuLogout);
+            }
+
+            if (users.get(i).getValid().equalsIgnoreCase("false")) {
+                if (users.get(i).getUsername().equalsIgnoreCase("") && users.get(i).getPassword().equalsIgnoreCase("")) {
+                    visible(lLoginFormUsernameWarningMessage);
+                    visible(lLoginFormPasswordWarningMessage);
+                } else if (users.get(i).getUsername().equalsIgnoreCase("")) {
+                    visible(lLoginFormUsernameWarningMessage);
+                } else if (users.get(i).getPassword().equalsIgnoreCase("")) {
+                    visible(lLoginFormPasswordWarningMessage);
+                } else {
+                    //visible(lLoginFormInvalidUsernamePasswordWarningMessage);
+                }
+            }
+        }
     }
 }
 
