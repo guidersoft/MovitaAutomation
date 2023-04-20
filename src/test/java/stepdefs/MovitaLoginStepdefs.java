@@ -70,7 +70,7 @@ public class MovitaLoginStepdefs extends BaseMovita {
     @Then("user try to login with credential given in excel file name as {string}")
     public void userTryToLoginWithCredentialGivenInExcelFileNameAs(String fileName) {
         String file = "src/test/resources/datafiles/" + fileName;
-        List<String> username = getExcelColValuesOf(file,0,1);
+        List<String> username = getExcelColValuesOf(file, 0, 1);
         List<String> password = getExcelColValuesOf(file, 0, 2);
         List<String> success = getExcelColValuesOf(file, 0, 3);
         for (int i = 0; i < username.size(); i++) {
@@ -102,48 +102,32 @@ public class MovitaLoginStepdefs extends BaseMovita {
     public void userTryToLoginWithCredentialGivenInYamlFileNameAs(String fileName) {
         String file = "src/test/resources/datafiles/" + fileName;
         MyPojo pojo = new ConfigYamlPojo();
-        ConfigYamlPojo pojo1 = (ConfigYamlPojo) getPojo(file, pojo);
+        List<ConfigJsonPojo.User> users = ((ConfigYamlPojo) getPojo(file, pojo)).getUsers();
 
-        String username1 = pojo1.getUsers().getUser1().getUsername();
-        String password1 = pojo1.getUsers().getUser1().getPassword();
-        sendKeys(lLoginFormUsername, username1);
-        sendKeys(lLoginFormPassword, password1);
-        click(lLoginFormSubmitButton);
-        click(lDemoFileDropdownMenu);
-        click(lDemoFileDropdownMenuLogout);
+        for (int i = 0; i < users.size(); i++) {
+            sendKeys(lLoginFormUsername, users.get(i).getUsername());
+            sendKeys(lLoginFormPassword, users.get(i).getPassword());
+            click(lLoginFormSubmitButton);
 
-        String username2 = pojo1.getUsers().getUser2().getUsername();
-        String password2 = pojo1.getUsers().getUser2().getPassword();
-        sendKeys(lLoginFormUsername, username2);
-        sendKeys(lLoginFormPassword, password2);
-        click(lLoginFormSubmitButton);
-        visible(lLoginFormInvalidUsernamePasswordWarningMessage);
+            if (users.get(i).getValid().equalsIgnoreCase("true")) {
+                click(lDemoFileDropdownMenu);
+                click(lDemoFileDropdownMenuLogout);
+            }
 
-        String username3 = pojo1.getUsers().getUser3().getUsername();
-        String password3 = pojo1.getUsers().getUser3().getPassword();
-        if (username3==null) username3 ="";
-        sendKeys(lLoginFormUsername, username3);
-        sendKeys(lLoginFormPassword, password3);
-        click(lLoginFormSubmitButton);
-        visible(lLoginFormUsernameWarningMessage);
+            if (users.get(i).getValid().equalsIgnoreCase("false")) {
+                if (users.get(i).getUsername().equalsIgnoreCase("") && users.get(i).getPassword().equalsIgnoreCase("")) {
+                    visible(lLoginFormUsernameWarningMessage);
+                    visible(lLoginFormPasswordWarningMessage);
+                } else if (users.get(i).getUsername().equalsIgnoreCase("")) {
+                    visible(lLoginFormUsernameWarningMessage);
+                } else if (users.get(i).getPassword().equalsIgnoreCase("")) {
+                    visible(lLoginFormPasswordWarningMessage);
+                } else {
+                    visible(lLoginFormInvalidUsernamePasswordWarningMessage);
+                }
+            }
+        }
 
-        String username4 = pojo1.getUsers().getUser4().getUsername();
-        String password4 = pojo1.getUsers().getUser4().getPassword();
-        if (password4==null) password4 ="";
-        sendKeys(lLoginFormUsername, username4);
-        sendKeys(lLoginFormPassword, password4);
-        click(lLoginFormSubmitButton);
-        visible(lLoginFormPasswordWarningMessage);
-
-        String username5 = pojo1.getUsers().getUser5().getUsername();
-        String password5 = pojo1.getUsers().getUser5().getPassword();
-        if (password5==null) password5 ="";
-        if (username5==null) username5 ="";
-        sendKeys(lLoginFormUsername, username5);
-        sendKeys(lLoginFormPassword, password5);
-        click(lLoginFormSubmitButton);
-        visible(lLoginFormUsernameWarningMessage);
-        visible(lLoginFormPasswordWarningMessage);
     }
 
     @Then("user try to login with credential given in json file name as {string}")
