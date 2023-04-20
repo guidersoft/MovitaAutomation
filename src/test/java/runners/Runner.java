@@ -10,7 +10,7 @@ import io.cucumber.testng.CucumberOptions;
         features = {"src/test/resources/features/yusuf/Movita_Loginpage.feature"},         // feature yolu alinirken content rootdan baslanir
         glue = {"stepdefs"},       // glue'lar, stepdefs ve hooks classlarinin yeridir, sourceroot'dan baslar
         dryRun = false,           // sadece step defsler düzgün hazirlanmismi, yapilandirma uygun mu
-        tags = "@Login"         // @login tagli senaryolar calistirilin
+        tags = "@LoginYaml"         // @login tagli senaryolar calistirilin
         /*plugin = {"pretty",
                 "json:test-output/cucumber-reports/cucumber.json",
                 "html:test-output/cucumber-reports/cucumberreport.html",

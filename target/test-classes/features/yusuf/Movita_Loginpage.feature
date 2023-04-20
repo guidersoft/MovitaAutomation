@@ -15,6 +15,10 @@ Feature: Login Page
 
     Examples:
       | username   | password   | success |
+      | demomovita | 1192movita | true    |
+      |            | 1192movita | false   |
+      | demomovita |            | false   |
+      |            |            | false   |
       | movita     | movita     | false   |
 
 

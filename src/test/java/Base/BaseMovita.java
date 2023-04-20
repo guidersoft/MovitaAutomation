@@ -226,7 +226,6 @@ public class BaseMovita implements Locator {
                 default -> throw new RuntimeException(file + " is not .yaml or .json file");
             }
         } catch (IOException e) {
-            //return null;
             throw new RuntimeException(e);
         }
     }

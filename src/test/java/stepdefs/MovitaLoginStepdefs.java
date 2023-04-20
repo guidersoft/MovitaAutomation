@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
 import readers.MyPojo;
 import readers.json.ConfigJsonPojo;
+import readers.yaml.ConfigYamlPojo;
+
 import java.util.List;
 import java.util.Map;
 
@@ -99,6 +101,49 @@ public class MovitaLoginStepdefs extends BaseMovita {
     @Then("user try to login with credential given in yaml file name as {string}")
     public void userTryToLoginWithCredentialGivenInYamlFileNameAs(String fileName) {
         String file = "src/test/resources/datafiles/" + fileName;
+        MyPojo pojo = new ConfigYamlPojo();
+        ConfigYamlPojo pojo1 = (ConfigYamlPojo) getPojo(file, pojo);
+
+        String username1 = pojo1.getUsers().getUser1().getUsername();
+        String password1 = pojo1.getUsers().getUser1().getPassword();
+        sendKeys(lLoginFormUsername, username1);
+        sendKeys(lLoginFormPassword, password1);
+        click(lLoginFormSubmitButton);
+        click(lDemoFileDropdownMenu);
+        click(lDemoFileDropdownMenuLogout);
+
+        String username2 = pojo1.getUsers().getUser2().getUsername();
+        String password2 = pojo1.getUsers().getUser2().getPassword();
+        sendKeys(lLoginFormUsername, username2);
+        sendKeys(lLoginFormPassword, password2);
+        click(lLoginFormSubmitButton);
+        visible(lLoginFormInvalidUsernamePasswordWarningMessage);
+
+        String username3 = pojo1.getUsers().getUser3().getUsername();
+        String password3 = pojo1.getUsers().getUser3().getPassword();
+        if (username3==null) username3 ="";
+        sendKeys(lLoginFormUsername, username3);
+        sendKeys(lLoginFormPassword, password3);
+        click(lLoginFormSubmitButton);
+        visible(lLoginFormUsernameWarningMessage);
+
+        String username4 = pojo1.getUsers().getUser4().getUsername();
+        String password4 = pojo1.getUsers().getUser4().getPassword();
+        if (password4==null) password4 ="";
+        sendKeys(lLoginFormUsername, username4);
+        sendKeys(lLoginFormPassword, password4);
+        click(lLoginFormSubmitButton);
+        visible(lLoginFormPasswordWarningMessage);
+
+        String username5 = pojo1.getUsers().getUser5().getUsername();
+        String password5 = pojo1.getUsers().getUser5().getPassword();
+        if (password5==null) password5 ="";
+        if (username5==null) username5 ="";
+        sendKeys(lLoginFormUsername, username5);
+        sendKeys(lLoginFormPassword, password5);
+        click(lLoginFormSubmitButton);
+        visible(lLoginFormUsernameWarningMessage);
+        visible(lLoginFormPasswordWarningMessage);
     }
 
     @Then("user try to login with credential given in json file name as {string}")
@@ -126,7 +171,7 @@ public class MovitaLoginStepdefs extends BaseMovita {
                 } else if (users.get(i).getPassword().equalsIgnoreCase("")) {
                     visible(lLoginFormPasswordWarningMessage);
                 } else {
-                    //visible(lLoginFormInvalidUsernamePasswordWarningMessage);
+                    visible(lLoginFormInvalidUsernamePasswordWarningMessage);
                 }
             }
         }
