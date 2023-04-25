@@ -54,11 +54,11 @@ public class Driver {
     public static WebDriverWait getWait() {
         return waits.get();
     }
-    public static void quitDriver() {
+    public static void quitDriver(){
         if (drivers.get() != null) {
             drivers.get().quit();
             drivers.set(null);
-
+            waits.set(null);
         }
     }
 }

@@ -20,7 +20,18 @@ public interface Locator {
 
     String TOP_MENU = "//*[@id='header-wrap']//a[contains(.,'%s')]";
     By lLanguageOptionButton = By.xpath("//div[@class='dropdown dropdown-langs']//button");
-    By lTextOfMobilVasıtaİzlemeTakipSistemi = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil')]");
+    By lTextOfMobilVasitaIzlemeTakipSistemi = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil')]");
+    By lLoginFormUsername = By.id("username");
+    By lLoginFormPassword = By.id("password");
+    By lLoginFormSubmitButton = By.xpath("//form//button[@type='submit']");
+    By lLoginFormUsernameWarningMessage = By.xpath("//div[contains(text(),'Lütfen kullanıcı adı girin!')]");
+    By lLoginFormPasswordWarningMessage = By.xpath("//div[contains(text(),'Lütfen şifre girin!')]");
+    By lLoginFormInvalidUsernamePasswordWarningMessage = By.xpath("//div[@class='toast-message']");
+    By lDemoFileDropdownMenuLogout = By.xpath("//a[contains(.,' Çıkış Yap')]");
+    By lDemoFileDropdownMenu = By.xpath("//a[contains(.,'Demo Filo (129)')]");
+    By lLoginFormAnaSayfayaDon = By.xpath("//a[contains(.,'Ana sayfaya dön')]");
+    By lLoginFormBackToHomepage = By.xpath("//a[contains(.,'back to home page')]");
+
 
 
 }
