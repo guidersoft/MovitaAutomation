@@ -1,29 +1,22 @@
-application:
-  url: https://movita.com.tr/
-
+url: https://movita.com.tr/
 users:
-  user1:
+  - type: user
+    valid: 'true'
     username: demomovita
     password: 1192movita
-    valid: true
-
-  user2:
+  - type: user
+    valid: 'false'
     username: movita
     password: movita
-    valid: false
-
-  user3:
-    username:
+  - type: user
+    valid: 'false'
+    username: ''
     password: 1192movita
-    valid: false
-
-  user4:
+  - type: user
+    valid: 'false'
     username: demomovita
-    password:
-    valid: false
-
-  user5:
-    username:
-    password:
-    valid: false
-
+    password: ''
+  - type: user
+    valid: 'false'
+    username: ''
+    password: ''

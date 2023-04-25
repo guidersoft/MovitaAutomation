@@ -6,7 +6,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.testng.annotations.DataProvider;
 import readers.MyPojo;
 import readers.json.ConfigJsonPojo;
 import readers.yaml.ConfigYamlPojo;
@@ -18,8 +17,8 @@ import java.util.Map;
 public class MovitaLoginStepdefs extends BaseMovita {
 
     @When("user clicks {string} links")
-    public void userClicksLinks(String arg0) {
-        click(By.xpath(String.format(TOP_MENU, "GİRİŞ Yap")));
+    public void userClicksLinks(String text) {
+        click(By.xpath(String.format(TOP_MENU, text)));
     }
 
     @Then("Login page should be visible")
@@ -158,6 +157,15 @@ public class MovitaLoginStepdefs extends BaseMovita {
                     visible(lLoginFormInvalidUsernamePasswordWarningMessage);
                 }
             }
+        }
+    }
+
+    @Then("user sees {string} on loginpage")
+    public void userSeesOnLoginpage(String text) {
+        if (text.equalsIgnoreCase("Ana sayfaya dön")){
+            visible(lLoginFormAnaSayfayaDon);
+        }else {
+            visible(lLoginFormBackToHomepage);
         }
     }
 }

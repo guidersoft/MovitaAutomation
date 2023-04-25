@@ -29,6 +29,8 @@ public interface Locator {
     By lLoginFormInvalidUsernamePasswordWarningMessage = By.xpath("//div[@class='toast-message']");
     By lDemoFileDropdownMenuLogout = By.xpath("//a[contains(.,' Çıkış Yap')]");
     By lDemoFileDropdownMenu = By.xpath("//a[contains(.,'Demo Filo (129)')]");
+    By lLoginFormAnaSayfayaDon = By.xpath("//a[contains(.,'Ana sayfaya dön')]");
+    By lLoginFormBackToHomepage = By.xpath("//a[contains(.,'back to home page')]");
 
 
 
