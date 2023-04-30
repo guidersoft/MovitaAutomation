@@ -75,5 +75,6 @@ public class MovitaStepdefs extends BaseMovita{
         Assert.assertTrue(driver.findElement(lTextOfMobilVasitaIzlemeTakipSistemi).getText().contains(text));
     }
 /// yusuf
+//yorum
 
 }
