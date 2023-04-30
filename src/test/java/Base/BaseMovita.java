@@ -1,7 +1,6 @@
 package Base;
 
 import Locaators.Locator;
-import Utilities.Browsers;
 import Utilities.Driver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -13,7 +12,6 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.*;
 import readers.MyPojo;
 
 import java.io.*;
@@ -28,7 +26,7 @@ public class BaseMovita implements Locator {
     protected WebDriverWait wait;
 
     {
-        driver = Driver.getDriver();
+        driver =Driver.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
