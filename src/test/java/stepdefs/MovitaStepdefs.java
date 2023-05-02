@@ -1,80 +1,86 @@
 package stepdefs;
 
+
 import Base.BaseMovita;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class MovitaStepdefs extends BaseMovita{
+public class MovitaStepdefs extends BaseMovita {
 
     @Given("users navigate to {string}")
     public void usersNavigateTo(String url) {
         driver.get(url);
-
     }
-
     @When("users clicked the movita logo")
     public void usersClickedTheMovitaLogo() {
         click(llogo);
     }
-
     @And("Mobile Vehicle Tracking System shoould be visible")
     public void mobileVehicleTrackingSystemShoouldBeVisible() {
-        visible(lMobilVasita);
-
+        visible(lMobilVasıtaTurkish);
     }
-
     @Then("should be success")
     public void shouldBeSuccess() {
-        getScreenshot("Mobil Vasıta");
-
+      getScreenshot("Mobil Vasıta");
     }
 
-    @When("user hover over {string}")
-    public void userHoverOver(String mainLink) {
-        hoverOverByAction(By.xpath(String.format(TOP_MENU, mainLink)));
+    @Given("user clicks the enter button")
+    public void userClicksTheEnterButton() {
+        click(lEnterButton);
     }
-
-    @And("user assert change color of {string}")
-    public void userAssertChangeColorOf(String mainLink) {
-        assertChangeColor(By.xpath(String.format(TOP_MENU, mainLink)),"#00adee");
+    @And("user clicks the Turkish language button")
+    public void userClicksTheTurkishLanguageButton() {
+        click(lTurkishLang);
     }
-
-    @And("user click {string}")
-    public void userClick(String mainLink) {
-        click(By.xpath(String.format(TOP_MENU, mainLink)));
+    @And("user String verify Türkce → “Mobil Vasita izleme takip Sistemi” yazisini verify et")
+    public void userStringVerifyTürkceMobilVasitaIzlemeTakipSistemiYazisiniVerifyEt() {
+        visible(lMobilVasıtaTurkish);
     }
-
-    @Then("{string} should be visible")
-    public void shouldBeVisible(String url) {
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+    @And("user clicks the english language button")
+    public void userClicksTheEnglishLanguageButton() {
+        click(lEnglishLang);
     }
-
-    @Then("{string} should be visible in related page")
-    public void shouldBeVisibleInRelatedPage(String text) {
-        Assert.assertTrue(driver.getPageSource().contains(text));
+    @And("user String verify English → “Mobile Vehicle Tracking System” yazisini verify et")
+    public void userStringVerifyEnglishMobileVehicleTrackingSystemYazisiniVerifyEt() {
+        visible(lMobilVasıtaEnglish);
+        getScreenshot("Mobile Vehicle Tracking System");
     }
+    @When("user hover over the homepage title and title color should be changeable")
+    public void userHoverOverTheHomepageTitleAndTitleColorShouldBeChangeable() {
 
-    @When("user clicked the language option dropdown menu")
-    public void userClickedTheLanguageOptionDropdownMenu() {
-        click(lLanguageOptionButton);
+        WebElement element = driver.findElement(lAnaSayfa);
+        String beforeColor = element.getCssValue("color");
+        hoverAll(lAnaSayfa);
+        String afterColor = element.getCssValue("color");
+        Assert.assertNotEquals(beforeColor, afterColor);
     }
-
-    @And("user select {string} option")
-    public void userSelectOption(String language) {
-        click(By.xpath(String.format(TOP_MENU, language)));
+    @And("home title should be clickable")
+    public void homeTitleShouldBeClickable() {
+        click(lAnaSayfa);
     }
-
-
-    @Then("user sees {string} on Page")
-    public void userSeesOnPage(String text) {
-        visible(lTextOfMobilVasitaIzlemeTakipSistemi);
-        Assert.assertTrue(driver.findElement(lTextOfMobilVasitaIzlemeTakipSistemi).getText().contains(text));
+    @When("users hover over on the {string}")
+    public void usersHoverOverOnThe(String mainTitle) {
+        hoverOver(homePageMenu(mainTitle));
     }
-/// yusuf
-//yorum
-
+    @And("hover over the  {string}")
+    public void hoverOverThe(String subTitle) {
+        hoverOver(MainSubtitle(subTitle));
+    }
+    @And("The user {string} the subTitle")
+    public void theUserTheSubTitle(String text) {
+        click(MainSubtitle(text));
+    }
+    @And("The {string} and{string} colours should be change")
+    public void theAndColoursShouldBeChange(String mainTitle, String subTitle) {
+        assertChangeColorMainTitle(mainTitle);
+        assertChangeColorSubTitle(subTitle);
+    }
+    @Then("verify the subtitle with {string}")
+    public void verifyTheSubtitleWith(String text) {
+        visibleVerifyWithSubtitle(text);
+    }
 }
