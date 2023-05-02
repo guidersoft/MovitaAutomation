@@ -26,7 +26,7 @@ public class BaseMovita implements Locator {
     protected WebDriverWait wait;
 
     {
-        driver =Driver.getDriver();
+        driver = Driver.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
@@ -226,6 +226,88 @@ public class BaseMovita implements Locator {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-}
 
+    }
+
+    public void hoverOver(WebElement element) {
+        new Actions(driver)
+                .moveToElement(element, -20, 0)
+                .pause(100)
+                .build()
+                .perform();
+    }
+
+    public void hoverAll1(By locator) {
+        List<WebElement> list = driver.findElements(locator);
+
+        for (WebElement element : list) {
+            new Actions(driver)
+                    .moveToElement(element, -20, 0)
+                    .build()
+                    .perform();
+        }
+        By lAnaSayfa = By.xpath("//ul[@class='menu-container']//div[text()='Ana Sayfa']");
+        By lKurumsal = By.xpath("//ul[@class='menu-container']//div[text()='Kurumsal']");
+
+        By lSubMenuKurumsal = By.xpath("(//ul[@class='sub-menu-container'])[1]//div");
+        By lSubMenuUrunler = By.xpath("(//ul[@class='sub-menu-container'])[2]//div");
+        By lSubMenuCozumler = By.xpath("(//ul[@class='sub-menu-container'])[3]//div");
+
+        By lSubTitlesKurumsal = By.xpath("//div[text()='Belgelerimiz']");
+        By lSubMenuKurumsalVerify = By.xpath("//h1[text()='Bayilik Başvuru']");
+
+
+    }
+
+    public void visibleVerifyWithSubtitleKurumsal(String text) {
+        By lSubTitleVerify = By.xpath("//div//h1[contains(.,'" + text + "')]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(lSubTitleVerify));
+    }
+
+    public void visibleVerifyWithSubtitleUrunler(String text) {
+        By lSubTitleVerify = By.xpath("//div//h3[contains(.,'" + text + "')]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lSubTitleVerify));
+    }
+    public void visibleVerifyWithSubtitle(String text) {
+        By lSubTitleVerify=By.xpath("//div[@class='col-md-3']//img");
+        wait.until(ExpectedConditions.presenceOfElementLocated(lSubTitleVerify));
+    }
+
+    public void visibleVerifyWithSubtitleCozumler(String text) {
+
+        By lSubTitleVerify = By.xpath("//h2[@class='d-flex'][contains(.,' " + text + "')]");
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(lSubTitleVerify));
+
+
+        String beforeColorMainTitle = homePageMenu(text).getCssValue("color");
+        System.out.println(beforeColorMainTitle);
+        hoverOver(homePageMenu(text));
+        String afterColorMainTitle = homePageMenu(text).getCssValue("color");
+        System.out.println(afterColorMainTitle);
+        Assert.assertNotEquals(beforeColorMainTitle, afterColorMainTitle);
+    }
+    public WebElement MainSubtitle(String text) {
+        WebElement element = driver.findElement(By.xpath("//ul[@class='sub-menu-container']//div[text()='" + text + "']"));
+        wait.until(ExpectedConditions.visibilityOf(element));
+        return element;
+    }
+    public void assertChangeColorMainTitle(String text) {
+
+        String beforeColorMainTitle=homePageMenu(text).getCssValue("color");
+        System.out.println(beforeColorMainTitle);
+        hoverOver(homePageMenu(text));
+        String afterColorMainTitle=homePageMenu(text).getCssValue("color");
+        System.out.println(afterColorMainTitle);
+        Assert.assertNotEquals(beforeColorMainTitle,afterColorMainTitle);
+    }
+
+    public void assertChangeColorSubTitle(String text) {
+        String beforeColorMainTitle=MainSubtitle(text).getCssValue("color");
+        hoverOver(MainSubtitle(text));
+        String afterColorMainTitle=MainSubtitle(text).getCssValue("color");
+        Assert.assertNotEquals(beforeColorMainTitle,afterColorMainTitle);
+    }
+
+
+    
+}
