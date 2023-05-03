@@ -168,5 +168,7 @@ public class MovitaLoginStepdefs extends BaseMovita {
             visible(lLoginFormBackToHomepage);
         }
     }
+
+
 }
 

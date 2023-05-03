@@ -40,7 +40,7 @@ public class Driver {
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--remote-allow-origins=*");
-                    //options.addArguments("--headles");
+                    //options.addArguments("--headless");
                     drivers.set(new ChromeDriver(options));
                     break;
 
