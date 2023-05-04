@@ -1,4 +1,4 @@
-package stepdefs;
+package stepdefs.suleyman;
 
 import Base.BaseMovita;
 import io.cucumber.java.en.And;
@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class MovitaMyStepdefs extends BaseMovita {
+public class SMyStepdefs extends BaseMovita {
 
     @Given("users navigate to {string}")
     public void usersNavigateTo(String url) {

@@ -32,7 +32,7 @@ public interface Locator {
     By lLoginFormAnaSayfayaDon = By.xpath("//a[contains(.,'Ana sayfaya dön')]");
     By lLoginFormBackToHomepage = By.xpath("//a[contains(.,'back to home page')]");
 
-
+//ul[@class='menu-container']//div[text()='Kurumsal']
 
 
 

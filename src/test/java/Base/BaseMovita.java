@@ -308,6 +308,8 @@ public class BaseMovita implements Locator {
         Assert.assertNotEquals(beforeColorMainTitle,afterColorMainTitle);
     }
 
+public void suleyman(){
 
+}
     
 }
