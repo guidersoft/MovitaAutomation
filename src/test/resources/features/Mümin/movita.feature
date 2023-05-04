@@ -58,3 +58,12 @@ Feature: HomePage
       | Çözümler  | Güvenlik Kuvvetleri Araçları | Güvenlik Kuvvetleri Araçları | Güvenlik Kuvvetleri Araçları         |
       | Çözümler  | Yük ve Eşya Taşıyan Araçlar  | Yük ve Eşya Taşıyan Araçlar  | Yük ve Eşya Taşıyan Araçlar          |
       | Çözümler  | Belediye ve Halk Otobüsleri  | Belediye ve Halk Otobüsleri  | Belediye ve Halk Otobüsleri          |
+
+  @LoginForm
+  Scenario: Araç Bazlı Rapor Menüsü
+    When  user clicks the login button
+    And   user sends <username> and <password>
+        |username|demomovita|
+        |password|1192movita|
+    And   user clicks login form login button
+

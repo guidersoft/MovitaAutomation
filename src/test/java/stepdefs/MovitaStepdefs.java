@@ -2,12 +2,15 @@ package stepdefs;
 
 
 import Base.BaseMovita;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import java.util.Map;
 
 public class MovitaStepdefs extends BaseMovita {
 
@@ -83,4 +86,26 @@ public class MovitaStepdefs extends BaseMovita {
     public void verifyTheSubtitleWith(String text) {
         visibleVerifyWithSubtitle(text);
     }
+
+    @When("user clicks the login button")
+    public void userClicksTheLoginButton() {
+        click(homePageMenu("GİRİŞ Yap"));
+    }
+
+    @And("user sends <username> and <password>")
+    public void userSendsUsernameAndPassword(DataTable table) {
+        Map<String,String> map=table.asMap();
+        String username = map.get("username");
+        String password = map.get("password");
+        sendKeys(loginFormİnput("username"),username);
+        sendKeys(loginFormİnput("password"),password);
+
+    }
+
+    @And("user clicks login form login button")
+    public void userClicksLoginFormLoginButton() {
+        click(lLoginFormSubmitButton);
+    }
+
+
 }
