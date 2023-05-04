@@ -2,4 +2,4 @@
 Feature:
   Scenario:
     Given go to homepage
-    Then click
+    Then go
