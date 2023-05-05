@@ -5,9 +5,10 @@ import org.openqa.selenium.WebElement;
 
 public interface Locator {
     String url = "https://movita.com.tr/";
-    By llogo = By.xpath("//a[@class='standard-logo']");
-    By lMobilVasita = By.xpath("//div[@class='tp-mask-wrap']//div[text()='Mobil Vasıta İzleme Takip Sistemi']");
     String str = "Mobil Vasıta İzleme Takip Sistemi";
+    By llogo = By.xpath("//a[@class='standard-logo']");
+    By lMobilVasita = By.xpath("//div[@class='tp-mask-wrap']//div[text()='"+str+"']");
+
     By lEnterButton = By.xpath("//button[@id='dropdownMenuButton']/parent::div");
     By lEnglishLang = By.xpath("(//button[@id='dropdownMenuButton']/parent::div//a)[1]");
     By lTurkishLang = By.xpath("(//button[@id='dropdownMenuButton']/parent::div//a)[2]");

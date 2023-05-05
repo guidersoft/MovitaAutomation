@@ -18,7 +18,7 @@ import java.time.Duration;
 import java.util.Map;
 
 
-public class ErkanCihanStepDefs extends BaseMovita{
+public class MovitaStepdefs extends BaseMovita{
     protected WebDriver driver;
     protected WebDriverWait wait;
 
