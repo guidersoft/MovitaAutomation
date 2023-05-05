@@ -12,7 +12,7 @@ public interface Locator {
     By lEnterButton = By.xpath("//button[@id='dropdownMenuButton']/parent::div");
     By lEnglishLang = By.xpath("(//button[@id='dropdownMenuButton']/parent::div//a)[1]");
     By lTurkishLang = By.xpath("(//button[@id='dropdownMenuButton']/parent::div//a)[2]");
-    By lHeaderMenuLink = By.xpath("//ul[@class='menu-container']//div");
+    //By lHeaderMenuLink = By.xpath("//ul[@class='menu-container']//div");
     By lAnaSayfa = By.xpath("//ul[@class='menu-container']//div[text()='Ana Sayfa']");
     By lSubMenuKurumsal=By.xpath("(//ul[@class='sub-menu-container'])[1]//div");
 
