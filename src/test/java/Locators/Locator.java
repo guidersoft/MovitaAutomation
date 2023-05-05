@@ -1,4 +1,4 @@
-package Locaators;
+package Locators;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,8 +16,6 @@ public interface Locator {
     By lSubMenuKurumsal=By.xpath("(//ul[@class='sub-menu-container'])[1]//div");
 
     WebElement homePageMenu(String text);
-
-
     String TOP_MENU = "//*[@id='header-wrap']//a[contains(.,'%s')]";
     By lLanguageOptionButton = By.xpath("//div[@class='dropdown dropdown-langs']//button");
     By lTextOfMobilVasitaIzlemeTakipSistemi = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil')]");
@@ -34,4 +32,32 @@ public interface Locator {
 
 
 
-}
+
+        By lMobilVasıtaTurkish = By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobil Vasıta')]");
+
+        By lMobilVasıtaEnglish=By.xpath("//div[@class='tp-mask-wrap']//div[contains(text(),'Mobile Vehicle')]");
+
+
+
+
+
+        By lKurumsal = By.xpath("//ul[@class='menu-container']//div[text()='Kurumsal']");
+
+
+        By lSubMenuUrunler=By.xpath("(//ul[@class='sub-menu-container'])[2]//div");
+        By lSubMenuCozumler=By.xpath("(//ul[@class='sub-menu-container'])[3]//div");
+
+        By lSubTitlesKurumsal=By.xpath("//div[text()='Belgelerimiz']");
+        By lSubMenuKurumsalVerify=By.xpath("//h1[text()='Bayilik Başvuru']");
+
+
+
+
+
+
+
+    }
+
+
+
+

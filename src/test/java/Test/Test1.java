@@ -41,13 +41,13 @@ public class Test1 extends BaseMovita {
     }
     @Test(priority = 4,dependsOnMethods = "openMovita")
     public void homePage(){
-        hoverOver(homePageMenu("Ana Sayfa"),"Ana Sayfa");
+        hoverOver(homePageMenu("Ana Sayfa"));
         visible(lMobilVasita);
 
     }
     @Test(priority = 5,dependsOnMethods = "openMovita")
     public void kurumsal(){
-        hoverOver(homePageMenu("Kurumsal"),"Kurumsal");
+        hoverOver(homePageMenu("Kurumsal"));
         hoverAll(lSubMenuKurumsal);
 
     }

@@ -1,6 +1,6 @@
 package Base;
 
-import Locaators.Locator;
+import Locators.Locator;
 import Utilities.Driver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -35,18 +35,37 @@ public class BaseMovita implements Locator {
         driver.get(url);
     }
 
-    public void click(By locator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+    public void click(By locator){
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         click(element);
 
     }
-
     public void click(WebElement element) {
-        element.click();
+        wait.until(driver -> {
+            try {
+                element.click();
+                return true;
+            } catch (Exception e1) {
+                try {
+                    new Actions(driver).moveToElement(element).click().perform();
+                    return true;
+                } catch (Exception e2) {
+                    try {
+                        ((JavascriptExecutor) driver).executeScript("argument[0].click", element);
+                        return true;
+                    } catch (Exception e3) {
+                        return false;
+                    }
 
+                }
+
+
+            }
+
+        });
     }
 
-    public void visible(By locator) {
+        public void visible(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
@@ -92,11 +111,10 @@ public class BaseMovita implements Locator {
 
     }
 
-    public void hoverOver(WebElement element, String text) {
+    public void hoverOver(WebElement element) {
         new Actions(driver)
                 .moveToElement(element)
-                .click(homePageMenu(text))
-                .build()
+               .build()
                 .perform();
     }
 
@@ -114,7 +132,7 @@ public class BaseMovita implements Locator {
 
     @Override
     public WebElement homePageMenu(String text) {
-        WebElement element = driver.findElement(By.xpath("//ul[@class='menu-container']//div[text()='" + text + "']"));
+        WebElement element = driver.findElement(By.xpath("//div[@class='header-row']//div[text()='" + text + "']"));
 
         return element;
     }
@@ -226,6 +244,51 @@ public class BaseMovita implements Locator {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
+    }
+    public WebElement MainSubtitle(String text) {
+        WebElement element = driver.findElement(By.xpath("//ul[@class='sub-menu-container']//div[text()='" + text + "']"));
+        wait.until(ExpectedConditions.visibilityOf(element));
+        return element;
+    }
+    public void assertChangeColorMainTitle(String text) {
+
+        String beforeColorMainTitle=homePageMenu(text).getCssValue("color");
+        System.out.println(beforeColorMainTitle);
+        hoverOver(homePageMenu(text));
+        String afterColorMainTitle=homePageMenu(text).getCssValue("color");
+        System.out.println(afterColorMainTitle);
+        Assert.assertNotEquals(beforeColorMainTitle,afterColorMainTitle);
+    }
+
+    public void assertChangeColorSubTitle(String text) {
+        String beforeColorMainTitle=MainSubtitle(text).getCssValue("color");
+        hoverOver(MainSubtitle(text));
+        String afterColorMainTitle=MainSubtitle(text).getCssValue("color");
+        Assert.assertNotEquals(beforeColorMainTitle,afterColorMainTitle);
+    }
+    public void visibleVerifyWithSubtitleKurumsal(String text) {
+        By lSubTitleVerify=By.xpath("//div//h1[contains(.,'"+text+"')]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(lSubTitleVerify));
+    }
+    public void visibleVerifyWithSubtitleUrunler(String text) {
+        By lSubTitleVerify=By.xpath("//div//h3[contains(.,'"+text+"')]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lSubTitleVerify));
+    }
+    public void visibleVerifyWithSubtitleCozumler(String text) {
+
+        By lSubTitleVerify=By.xpath("//h2[@class='d-flex'][contains(.,' "+text+"')]");
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(lSubTitleVerify));
+
+
+    }
+    public By loginFormİnput(String text){
+        By lLoginForm = By.xpath("//form[@class='needs-validation mb-2 mt-10']//input[@id='"+text+"']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lLoginForm));
+        // WebElement element = driver.findElement(lLoginForm);
+        return lLoginForm;
+
     }
 }
 
