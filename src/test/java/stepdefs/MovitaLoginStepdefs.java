@@ -1,6 +1,8 @@
 package stepdefs;
 
 import Base.BaseMovita;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -10,6 +12,9 @@ import readers.MyPojo;
 import readers.json.ConfigJsonPojo;
 import readers.yaml.ConfigYamlPojo;
 
+
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -167,6 +172,35 @@ public class MovitaLoginStepdefs extends BaseMovita {
         }else {
             visible(lLoginFormBackToHomepage);
         }
+
     }
+    public MyPojo getPojo(String file, MyPojo pojo) {
+        String[] arr = file.split("[.]");
+        String fileType = arr[arr.length - 1].toLowerCase();
+        try {
+            switch (fileType) {
+                case "json" -> {
+                    ObjectMapper mapperJson = new ObjectMapper();
+                    return mapperJson.readValue(new FileReader(file), pojo.getClass());
+                }
+                case "yaml" -> {
+                    ObjectMapper mapperYaml = new ObjectMapper(new YAMLFactory());
+                    return mapperYaml.readValue(new FileReader(file), pojo.getClass());
+                }
+                default -> throw new RuntimeException(file + " is not .yaml or .json file");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
 }
+
+
+
+
+
 

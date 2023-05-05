@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
@@ -32,12 +32,12 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.11.2</version>
+            <version>7.10.1</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
-            <version>7.11.2</version>
+            <version>7.10.1</version>
         </dependency>
         <!-- annotationslarlar getter, setter gibi standart islemleri yapabilmek icin lombok kullanilir -->
         <dependency>
@@ -46,7 +46,7 @@
             <version>1.18.26</version>
         </dependency>
 
-        <!-- extent report icin adaptör -->
+        <!-- extent report icin adaptÃ¶r -->
         <!-- Runner'da plugin'e
              "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
              eklenir
@@ -95,20 +95,27 @@
     </dependencies>
     <build>
         <plugins>
+            <!-- diger uygulamalarin testleri baslatma noktasi -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>**/SuleymanRunner.java</include>
+                        <!--  projede herhangi bir packagede, Runner ile baslayan java dosyalari -->
+                        <include>**/SuleymanRunner</include>
                     </includes>
-                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>14</source>
+                    <target>14</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
 </project>
+

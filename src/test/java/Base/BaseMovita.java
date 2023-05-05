@@ -12,7 +12,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import readers.MyPojo;
+
 
 import java.io.*;
 import java.time.Duration;
@@ -114,7 +114,7 @@ public class BaseMovita implements Locator {
 
     @Override
     public WebElement homePageMenu(String text) {
-        WebElement element = driver.findElement(By.xpath("//ul[@class='menu-container']//div[text()='" + text + "']"));
+        WebElement element = driver.findElement(By.xpath("//div[@class='header-row']//div[text()='" + text + "']"));
 
         return element;
     }
@@ -208,26 +208,6 @@ public class BaseMovita implements Locator {
         }
     }
 
-    public MyPojo getPojo(String file, MyPojo pojo) {
-        String[] arr = file.split("[.]");
-        String fileType = arr[arr.length - 1].toLowerCase();
-        try {
-            switch (fileType) {
-                case "json" -> {
-                    ObjectMapper mapperJson = new ObjectMapper();
-                    return mapperJson.readValue(new FileReader(file), pojo.getClass());
-                }
-                case "yaml" -> {
-                    ObjectMapper mapperYaml = new ObjectMapper(new YAMLFactory());
-                    return mapperYaml.readValue(new FileReader(file), pojo.getClass());
-                }
-                default -> throw new RuntimeException(file + " is not .yaml or .json file");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 
     public void hoverOver(WebElement element) {
         new Actions(driver)
@@ -268,8 +248,9 @@ public class BaseMovita implements Locator {
         By lSubTitleVerify = By.xpath("//div//h3[contains(.,'" + text + "')]");
         wait.until(ExpectedConditions.visibilityOfElementLocated(lSubTitleVerify));
     }
+
     public void visibleVerifyWithSubtitle(String text) {
-        By lSubTitleVerify=By.xpath("//div[@class='col-md-3']//img");
+        By lSubTitleVerify = By.xpath("//div[@class='col-md-3']//img");
         wait.until(ExpectedConditions.presenceOfElementLocated(lSubTitleVerify));
     }
 
@@ -286,30 +267,34 @@ public class BaseMovita implements Locator {
         System.out.println(afterColorMainTitle);
         Assert.assertNotEquals(beforeColorMainTitle, afterColorMainTitle);
     }
+
     public WebElement MainSubtitle(String text) {
         WebElement element = driver.findElement(By.xpath("//ul[@class='sub-menu-container']//div[text()='" + text + "']"));
         wait.until(ExpectedConditions.visibilityOf(element));
         return element;
     }
+
     public void assertChangeColorMainTitle(String text) {
 
-        String beforeColorMainTitle=homePageMenu(text).getCssValue("color");
+        String beforeColorMainTitle = homePageMenu(text).getCssValue("color");
         System.out.println(beforeColorMainTitle);
         hoverOver(homePageMenu(text));
-        String afterColorMainTitle=homePageMenu(text).getCssValue("color");
+        String afterColorMainTitle = homePageMenu(text).getCssValue("color");
         System.out.println(afterColorMainTitle);
-        Assert.assertNotEquals(beforeColorMainTitle,afterColorMainTitle);
+        Assert.assertNotEquals(beforeColorMainTitle, afterColorMainTitle);
     }
 
     public void assertChangeColorSubTitle(String text) {
-        String beforeColorMainTitle=MainSubtitle(text).getCssValue("color");
+        String beforeColorMainTitle = MainSubtitle(text).getCssValue("color");
         hoverOver(MainSubtitle(text));
-        String afterColorMainTitle=MainSubtitle(text).getCssValue("color");
-        Assert.assertNotEquals(beforeColorMainTitle,afterColorMainTitle);
+        String afterColorMainTitle = MainSubtitle(text).getCssValue("color");
+        Assert.assertNotEquals(beforeColorMainTitle, afterColorMainTitle);
     }
 
-public void suleyman(){
+    public By LoginFormInput(String text) {
+        By lLoginForm = By.xpath("//form[@class='needs-validation mb-2 mt-10']//input[@id='" + text + "']");
+        WebElement element = driver.findElement(lLoginForm);
+        return lLoginForm;
+    }
 
-}
-    
 }

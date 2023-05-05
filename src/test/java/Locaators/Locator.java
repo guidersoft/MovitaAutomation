@@ -53,6 +53,16 @@ public interface Locator {
     By lSubTitlesKurumsal=By.xpath("//div[text()='Belgelerimiz']");
     By lSubMenuKurumsalVerify=By.xpath("//h1[text()='Bayilik Başvuru']");
 
+    //arac raporları
+
+    By lLoginFormLoginButton=By.xpath("//button[@type='submit']");
+
+
+
+
+
+
+
 
 
 

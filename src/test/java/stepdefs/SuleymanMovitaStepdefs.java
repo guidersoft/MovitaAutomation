@@ -1,6 +1,8 @@
-package stepdefs.suleyman;
+package stepdefs;
+
 
 import Base.BaseMovita;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -8,7 +10,9 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class SMyStepdefs extends BaseMovita {
+import java.util.Map;
+
+public class SuleymanMovitaStepdefs extends BaseMovita {
 
     @Given("users navigate to {string}")
     public void usersNavigateTo(String url) {
@@ -21,9 +25,7 @@ public class SMyStepdefs extends BaseMovita {
     @And("Mobile Vehicle Tracking System shoould be visible")
     public void mobileVehicleTrackingSystemShoouldBeVisible() {
         visible(lMobilVasıtaTurkish);
-
     }
-
     @Then("should be success")
     public void shouldBeSuccess() {
         getScreenshot("Mobil Vasıta");
@@ -84,4 +86,26 @@ public class SMyStepdefs extends BaseMovita {
     public void verifyTheSubtitleWith(String text) {
         visibleVerifyWithSubtitle(text);
     }
+//login form senaryosuna baglı
+    @When("user clicks the login button")
+    public void userClicksTheLoginButton() {
+        click(homePageMenu("GİRİŞ Yap"));
+    }
+
+    @And("user sends <username> and <password>")
+    public void userSendsUsernameAndPassword(DataTable table) {
+        Map<String,String> map=table.asMap();
+        String username = map.get("username");
+        String password = map.get("password");
+        sendKeys(LoginFormInput("username"),map.get(username));
+        sendKeys(LoginFormInput("password"),map.get(password));
+
+    }
+
+    @And("user clicks login form login button")
+    public void userClicksLoginFormLoginButton() {
+        click(lLoginFormSubmitButton);
+    }
+
+
 }

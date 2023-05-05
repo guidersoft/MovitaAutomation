@@ -28,8 +28,9 @@ Feature: HomePage
     When user hover over the homepage title and title color should be changeable
     And  home title should be clickable
     And  user String verify Türkce → “Mobil Vasita izleme takip Sistemi” yazisini verify et
+
   @HeaderMenu
-  Scenario Outline:Header menu
+  Scenario Outline: Header menu
     When  users hover over on the "<maintitle>"
     And   hover over the  "<subtitles>"
     And   The user "<clickable>" the subTitle
@@ -58,3 +59,13 @@ Feature: HomePage
       | Çözümler  | Güvenlik Kuvvetleri Araçları | Güvenlik Kuvvetleri Araçları | Güvenlik Kuvvetleri Araçları         |
       | Çözümler  | Yük ve Eşya Taşıyan Araçlar  | Yük ve Eşya Taşıyan Araçlar  | Yük ve Eşya Taşıyan Araçlar          |
       | Çözümler  | Belediye ve Halk Otobüsleri  | Belediye ve Halk Otobüsleri  | Belediye ve Halk Otobüsleri          |
+
+
+  @LoginForm
+  Scenario:  Araç Bazlı Rapor Menüsü
+    When  user clicks the login button
+    And   user sends <username> and <password>
+      | username | demomovita |
+      | password | 1192movita |
+    And   user clicks login form login button
+
