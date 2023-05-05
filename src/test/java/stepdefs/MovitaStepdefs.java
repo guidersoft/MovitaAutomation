@@ -227,7 +227,7 @@ public class MovitaStepdefs extends BaseMovita{
         }
 
     public void visibleVerifyWithSubtitle(String text) {
-        By lSubTitleVerify=By.xpath("//div[@class='col-md-3']//img");
+        By lSubTitleVerify=By.xpath("//div[@class='"+text+"']//img");
         wait.until(ExpectedConditions.presenceOfElementLocated(lSubTitleVerify));
     }
 
