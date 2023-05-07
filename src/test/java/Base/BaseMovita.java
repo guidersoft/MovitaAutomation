@@ -296,5 +296,14 @@ public class BaseMovita implements Locator {
         WebElement element = driver.findElement(lLoginForm);
         return lLoginForm;
     }
+    public  By raporlarSubMenu(String text){
+        By lRaporlarSubMenu=By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]//ul//li[contains(.,'"+text+"')]");
+        wait.until(ExpectedConditions.elementToBeClickable(lRaporlarSubMenu));
+        return lRaporlarSubMenu;
+    }
 
-}
+
+
+
+    }
+

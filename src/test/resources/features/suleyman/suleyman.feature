@@ -68,4 +68,10 @@ Feature: HomePage
       | username | demomovita |
       | password | 1192movita |
     And   user clicks login form login button
+    And verify with the map
+    And HoverOver the reportMenu
+    And click the base tool car
+
+
+
 

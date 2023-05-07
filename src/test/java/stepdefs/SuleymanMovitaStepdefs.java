@@ -86,7 +86,8 @@ public class SuleymanMovitaStepdefs extends BaseMovita {
     public void verifyTheSubtitleWith(String text) {
         visibleVerifyWithSubtitle(text);
     }
-//login form senaryosuna baglı
+
+//Araç bazlı login form senaryosu
     @When("user clicks the login button")
     public void userClicksTheLoginButton() {
         click(homePageMenu("GİRİŞ Yap"));
@@ -97,9 +98,8 @@ public class SuleymanMovitaStepdefs extends BaseMovita {
         Map<String,String> map=table.asMap();
         String username = map.get("username");
         String password = map.get("password");
-        sendKeys(LoginFormInput("username"),map.get(username));
-        sendKeys(LoginFormInput("password"),map.get(password));
-
+        sendKeys(LoginFormInput("username"),username);
+        sendKeys(LoginFormInput("password"),password);
     }
 
     @And("user clicks login form login button")
@@ -108,4 +108,19 @@ public class SuleymanMovitaStepdefs extends BaseMovita {
     }
 
 
+    @And("verify with the map")
+    public void verifyWithTheMap() {
+        visible(lVerifyMap);
+    }
+
+
+    @And("HoverOver the reportMenu")
+    public void hoveroverTheReportMenu() {
+  click(driver.findElement(lRapormenu));
+    }
+
+    @And("click the base tool car")
+    public void clickTheBaseToolCar() {
+        click(raporlarSubMenu("Araç Bazlı Rapor"));
+    }
 }

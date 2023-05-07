@@ -58,7 +58,12 @@ public interface Locator {
     By lLoginFormLoginButton=By.xpath("//button[@type='submit']");
 
 
+    //span[contains(.,'Raporlar')]
+    By lVerifyMap=By.xpath("//span[contains(.,'Raporlar')]");
+    By lRaporlarSubMenu=By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]//ul//li[contains(.,'Grup Bazlı')]");
 
+
+       By lRapormenu= By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]");
 
 
 
