@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import pageObjects.Mov_10;
 
 import java.util.Map;
 
@@ -97,8 +98,8 @@ public class MovitaStepdefs extends BaseMovita {
         Map<String,String> map=table.asMap();
         String username = map.get("username");
         String password = map.get("password");
-        sendKeys(loginFormİnput("username"),username);
-        sendKeys(loginFormİnput("password"),password);
+        sendKeys(Mov_10.loginFormİnput("username"),username);
+        sendKeys(Mov_10.loginFormİnput("password"),password);
 
     }
 
@@ -108,4 +109,40 @@ public class MovitaStepdefs extends BaseMovita {
     }
 
 
+    @And("verify with map")
+    public void verifyWithMap() {
+        visible(lVerifyMap);
+    }
+
+    @And("user click raporlar menu")
+    public void userClickRaporlarMenu() {
+        click(lRaporlarMenu);
+    }
+
+    @And("user clicks the base tool report")
+    public void userClicksTheBaseToolReport() {
+        click(Mov_10.raporlarSubMenu("Araç Bazlı Rapor"));
+    }
+
+    @And("user clicks the detailed filter")
+    public void userClicksTheDetailedFilter() {
+       click(LDetaylıFiltre);
+       bekle(500);
+    }
+
+    @And("user sends detailed filter of sub menu")
+    public void userSendsDetailedFilterOfSubMenu(DataTable table) {
+        Map<String, String> map = table.asMap();
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "2023.05.15");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "2023.05.15");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "2023.05.15");
+
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "Mayıs");
+        getScreenshot("Tarih");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "Haziran");
+        getScreenshot("İşe baslama");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "Temuz");
+        getScreenshot("İş bitiş");
+
+    }
 }

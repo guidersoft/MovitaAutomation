@@ -66,4 +66,13 @@ Feature: HomePage
         |username|demomovita|
         |password|1192movita|
     And   user clicks login form login button
+    And   verify with map
+    And   user click raporlar menu
+    And   user clicks the base tool report
+    And   user clicks the detailed filter
+    And  user sends detailed filter of sub menu
+      | tarih      | tarih_filter      |
+      | is baslama | is_baslama_filter |
+      | is bitis   | is_bitis_filter   |
+
 

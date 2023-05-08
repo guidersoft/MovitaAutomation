@@ -1,4 +1,5 @@
-.idea
-target
+.gitignore
+/idea
+/target
 test-output
-screenShots
+
