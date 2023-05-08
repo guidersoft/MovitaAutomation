@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseMovita implements Locator {
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    protected  static WebDriver driver;
+    protected static WebDriverWait wait;
 
     {
         driver =Driver.getDriver();
@@ -276,14 +276,10 @@ public class BaseMovita implements Locator {
         By lSubTitleVerify=By.xpath("//div[@class='col-md-3']//img");
         wait.until(ExpectedConditions.presenceOfElementLocated(lSubTitleVerify));
     }
-    public By loginFormİnput(String text){
-        By lLoginForm = By.xpath("//form[@class='needs-validation mb-2 mt-10']//input[@id='"+text+"']");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(lLoginForm));
-       // WebElement element = driver.findElement(lLoginForm);
-        return lLoginForm;
+
 
     }
 
 
-}
+
 

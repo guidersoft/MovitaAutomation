@@ -63,7 +63,15 @@ Feature: HomePage
   Scenario: Araç Bazlı Rapor Menüsü
     When  user clicks the login button
     And   user sends <username> and <password>
-        |username|demomovita|
-        |password|1192movita|
+      |username|demomovita|
+      |password|1192movita|
     And   user clicks login form login button
+    And   verify with map
+    And   user click raporlar menu
+    And   user clicks the base tool report
+    And   user clicks the detailed filter
+    And   user sends the detailed filter of sub menu
+      | tarih      | tarih_filter      |
+      | is baslama | is_baslama_filter |
+      | is bitis   | is_bitis_filter   |
 
