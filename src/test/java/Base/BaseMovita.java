@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseMovita implements Locator {
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    protected  static WebDriver driver;
+    protected static WebDriverWait wait;
 
     {
         driver =Driver.getDriver();
@@ -105,7 +105,7 @@ public class BaseMovita implements Locator {
 
     @Override
     public WebElement homePageMenu(String text) {
-        WebElement element = driver.findElement(By.xpath("//ul[@class='menu-container']//div[text()='" + text + "']"));
+        WebElement element = driver.findElement(By.xpath("//div[@class='header-row']//div[text()='" + text + "']"));
 
         return element;
     }
@@ -278,5 +278,8 @@ public class BaseMovita implements Locator {
     }
 
 
-}
+    }
+
+
+
 

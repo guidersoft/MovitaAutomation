@@ -2,12 +2,16 @@ package stepdefs;
 
 
 import Base.BaseMovita;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import pageObjects.Mov_10;
+
+import java.util.Map;
 
 public class MovitaStepdefs extends BaseMovita {
 
@@ -83,4 +87,61 @@ public class MovitaStepdefs extends BaseMovita {
     public void verifyTheSubtitleWith(String text) {
         visibleVerifyWithSubtitle(text);
     }
+
+    @When("user clicks the login button")
+    public void userClicksTheLoginButton() {
+        click(homePageMenu("GİRİŞ Yap"));
+    }
+
+    @And("user sends <username> and <password>")
+    public void userSendsUsernameAndPassword(DataTable table) {
+        Map<String,String> map=table.asMap();
+        String username = map.get("username");
+        String password = map.get("password");
+        sendKeys(Mov_10.loginFormInput("username"),username);
+        sendKeys(Mov_10.loginFormInput("password"),password);
+
+    }
+
+    @And("user clicks login form login button")
+    public void userClicksLoginFormLoginButton() {
+        click(lLoginFormSubmitButton);
+    }
+
+
+    @And("verify with map")
+    public void verifyWithMap() {
+        visible(Mov_10.lVerifyMap);
+    }
+
+    @And("user click raporlar menu")
+    public void userClickRaporlarMenu() {
+        click(Mov_10.lRaporlarMenu);
+    }
+
+    @And("user clicks the base tool report")
+    public void userClicksTheBaseToolReport() {
+        click(Mov_10.raporlarSubMenu("Araç Bazlı Rapor"));
+
+    }
+    @And("user clicks the detailed filter")
+    public void userClicksTheDetailedFilter() {
+        click(Mov_10.lDetaylıFiltre);
+
+    }
+    @And("user sends the detailed filter of sub menu")
+    public void userSendsTheDetailedFilterOfSubMenu(DataTable table) {
+        Map<String,String> map=table.asMap();
+        sendKeys(Mov_10.detailFilterSubMenu(map.get("tarih")),"2023.05.08");
+        sendKeys(Mov_10.detailFilterSubMenu(map.get("is baslama")),"2023.05.08");
+        sendKeys(Mov_10.detailFilterSubMenu(map.get("is bitis")),"2023.05.08");
+        sendKeys(Mov_10.detailFilterSubMenu(map.get("tarih")),"Mayıs");
+        getScreenshot("tarih");
+        sendKeys(Mov_10.detailFilterSubMenu(map.get("is baslama")),"Haziran");
+        getScreenshot("İşe Başlama");
+        sendKeys(Mov_10.detailFilterSubMenu(map.get("is bitis")),"Temmuz");
+        getScreenshot("İş Bitiş");
+    }
+
+
 }
