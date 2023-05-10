@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseMovita implements Locator {
-    protected  static WebDriver driver;
-    protected static WebDriverWait wait;
+    protected static WebDriver driver;
+    protected static  WebDriverWait wait;
 
     {
         driver =Driver.getDriver();
@@ -278,8 +278,5 @@ public class BaseMovita implements Locator {
     }
 
 
-    }
-
-
-
+}
 

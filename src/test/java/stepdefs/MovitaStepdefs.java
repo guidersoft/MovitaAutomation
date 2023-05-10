@@ -98,8 +98,8 @@ public class MovitaStepdefs extends BaseMovita {
         Map<String,String> map=table.asMap();
         String username = map.get("username");
         String password = map.get("password");
-        sendKeys(Mov_10.loginFormInput("username"),username);
-        sendKeys(Mov_10.loginFormInput("password"),password);
+        sendKeys(Mov_10.loginFormİnput("username"),username);
+        sendKeys(Mov_10.loginFormİnput("password"),password);
 
     }
 
@@ -111,37 +111,38 @@ public class MovitaStepdefs extends BaseMovita {
 
     @And("verify with map")
     public void verifyWithMap() {
-        visible(Mov_10.lVerifyMap);
+        visible(lVerifyMap);
     }
 
     @And("user click raporlar menu")
     public void userClickRaporlarMenu() {
-        click(Mov_10.lRaporlarMenu);
+        click(lRaporlarMenu);
     }
 
     @And("user clicks the base tool report")
     public void userClicksTheBaseToolReport() {
         click(Mov_10.raporlarSubMenu("Araç Bazlı Rapor"));
-
     }
+
     @And("user clicks the detailed filter")
     public void userClicksTheDetailedFilter() {
-        click(Mov_10.lDetaylıFiltre);
-
-    }
-    @And("user sends the detailed filter of sub menu")
-    public void userSendsTheDetailedFilterOfSubMenu(DataTable table) {
-        Map<String,String> map=table.asMap();
-        sendKeys(Mov_10.detailFilterSubMenu(map.get("tarih")),"2023.05.08");
-        sendKeys(Mov_10.detailFilterSubMenu(map.get("is baslama")),"2023.05.08");
-        sendKeys(Mov_10.detailFilterSubMenu(map.get("is bitis")),"2023.05.08");
-        sendKeys(Mov_10.detailFilterSubMenu(map.get("tarih")),"Mayıs");
-        getScreenshot("tarih");
-        sendKeys(Mov_10.detailFilterSubMenu(map.get("is baslama")),"Haziran");
-        getScreenshot("İşe Başlama");
-        sendKeys(Mov_10.detailFilterSubMenu(map.get("is bitis")),"Temmuz");
-        getScreenshot("İş Bitiş");
+       click(LDetaylıFiltre);
+       bekle(500);
     }
 
+    @And("user sends detailed filter of sub menu")
+    public void userSendsDetailedFilterOfSubMenu(DataTable table) {
+        Map<String, String> map = table.asMap();
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "2023.05.15");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "2023.05.15");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "2023.05.15");
 
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "Mayıs");
+        getScreenshot("Tarih");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "Haziran");
+        getScreenshot("İşe baslama");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "Temuz");
+        getScreenshot("İş bitiş");
+
+    }
 }
