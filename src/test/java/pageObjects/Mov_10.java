@@ -11,9 +11,6 @@ import java.time.Duration;
 
 public class Mov_10 extends BaseMovita {
 
-
-
-
     public static By lVerifyMap = By.xpath("//span[contains(.,'Raporlar')]");
     public static By lRaporlarSubMenu = By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]//ul//li[contains(.,'Grup Bazlı')]");
     public static By lRaporlarMenu = By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]");
