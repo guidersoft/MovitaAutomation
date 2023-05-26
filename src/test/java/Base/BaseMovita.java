@@ -102,7 +102,6 @@ public class BaseMovita implements Locator {
 
 
 
-
     @Override
     public WebElement homePageMenu(String text) {
         WebElement element = driver.findElement(By.xpath("//div[@class='header-row']//div[text()='" + text + "']"));

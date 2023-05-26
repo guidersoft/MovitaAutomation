@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pageObjects.Mov_10;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -57,6 +58,7 @@ public class MovitaStepdefs extends BaseMovita {
 
     @And("user clicks the english language button")
     public void userClicksTheEnglishLanguageButton() {
+        click(lEnterButton);
         click(lEnglishLang);
     }
 
@@ -234,6 +236,8 @@ public class MovitaStepdefs extends BaseMovita {
 
     @And("user select start of date")
     public void userSelectStartOfDate() {
+        /*Select select = new Select(Mov_10.selectMonth());
+        select.selectByValue("10");*/
         Select select = new Select(driver.findElement(By.xpath("//select[@class='monthselect']")));
         select.selectByValue("9");
 
@@ -245,6 +249,7 @@ public class MovitaStepdefs extends BaseMovita {
         bekle(200);
 
         click(driver.findElement(By.xpath("//td[@class='available' and text()='26']")));
+       // click(Mov_10.selectDay("20",1));
 
         bekle(3000);
     }
@@ -271,6 +276,7 @@ public class MovitaStepdefs extends BaseMovita {
         bekle(200);
 
         click(driver.findElement(By.xpath("//td[@class='available' and text()='26']")));
+       // click(Mov_10.selectDay("25",2));
 
         bekle(3000);
 
@@ -283,6 +289,78 @@ public class MovitaStepdefs extends BaseMovita {
     public void uuserClicksOnCreateReport() {
         click(Mov_10.raporlarSubMenu("Rapor Al"));
     }
+
+    @And("user sends username and password and verify")
+    public void userSendsUsernameAndPasswordAndVerify(DataTable table) {
+
+        List<Map<String, String>> mapList = table.asMaps();
+
+        for (Map<String, String> map : mapList) {
+
+            bekle(1000);
+            sendKeys(Mov_10.loginFormİnput("username"), map.get("username"));
+            sendKeys(Mov_10.loginFormİnput("password"), map.get("password"));
+
+
+            if (map.get("verify").equalsIgnoreCase("false")) {
+                click(lLoginFormSubmitButton);
+                bekle(1000);
+
+                visible(Mov_10.username_password("Lütfen şifre girin!"));
+                getScreenshot("lütfen");
+
+/*
+
+            } else if (map.get("verify").equalsIgnoreCase("false")) {
+
+                click(lLoginFormSubmitButton);
+                bekle(1000);
+                visible(Mov_10.username_password("Lütfen kullanıcı adı girin!"));
+
+            } else if (map.get("verify").equalsIgnoreCase("false")) {
+
+                click(lLoginFormSubmitButton);
+                bekle(1000);
+               //visible(Mov_10.lHata);
+                getScreenshot("hata");
+*/
+
+            } else {
+
+                click(lLoginFormSubmitButton);
+                bekle(1000);
+                visible(Mov_10.lVerifyMap);
+                getScreenshot("map");
+
+            }
+        }
+
+    }
+
+    @And("user click demoFilo Button")
+    public void userClickDemoFiloButton() {
+        click(Mov_10.demoFilo());
+    }
+
+    @And("user clicks logout")
+    public void userClicksLogout() {
+        bekle(1000);
+        click(lLogoutDemoFilo);
+    }
+    @And("user clicks return the homepage")
+    public void userClicksReturnTheHomepage() {
+        bekle(1000);
+        click(lAnasayfayaDon);
+    }
+
+
+
+    @And("user clicks the english login button")
+    public void userClicksTheEnglishLoginButton() {
+        click(Mov_10.lMobilVasıtaEnglish);
+    }
+
+
 }
 
 

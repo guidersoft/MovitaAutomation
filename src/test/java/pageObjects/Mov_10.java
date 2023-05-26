@@ -2,6 +2,7 @@ package pageObjects;
 
 import Base.BaseMovita;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Mov_10 extends BaseMovita {
@@ -21,13 +22,13 @@ public class Mov_10 extends BaseMovita {
     }
 
     public static By raporlarSubMenu(String text) {
-        return  By.xpath("//a[contains(.,'" + text + "')]");
+        return By.xpath("//a[contains(.,'" + text + "')]");
 
 
     }
 
     public static By detailedFilterSubMenu(String text) {
-        return  By.xpath("//div[@id='user-profile']//input[@id='" + text + "']");
+        return By.xpath("//div[@id='user-profile']//input[@id='" + text + "']");
 
     }
 
@@ -37,29 +38,50 @@ public class Mov_10 extends BaseMovita {
     }
 
     public static By aracSelect(String text) {
-        return By.xpath("//div[@class='card']//select[@id='aracSelect']//option[contains(.,'"+text+"')]");
+        return By.xpath("//div[@class='card']//select[@id='aracSelect']//option[contains(.,'" + text + "')]");
 
 
     }
-    public static By selectDateMenu(String text){
-        return By.xpath("//div[@class='form-group']//input[@id='"+text+"']");
+
+    public static By selectDateMenu(String text) {
+        return By.xpath("//div[@class='form-group']//input[@id='" + text + "']");
 
     }
-    public static By selectMonth(String monthselect,String month,int num){
-        return By.xpath("(//div[@class='calendar-table']//select[@class='"+monthselect+"'])["+num+"]//option[text()='"+month+"']");
+
+    public static By selectMonth(String monthselect, String month, int num) {
+        return By.xpath("(//div[@class='calendar-table']//select[@class='" + monthselect + "'])[" + num + "]//option[text()='" + month + "']");
 
     }
-    public static By selectYear(String yearselect,String year,int num){
 
-        return By.xpath("(//div[@class='calendar-table']//select[@class='"+yearselect+"'])["+num+"]//option[text()='"+year+"']");
+    public static By selectYear(String yearselect, String year, int num) {
 
-    }
-    public static By selectDay(String day,int num){
-
-        return By.xpath(" (//div[@class='calendar-table']//tr//td[text()='"+day+"'])["+num+"]");
+        return By.xpath("(//div[@class='calendar-table']//select[@class='" + yearselect + "'])[" + num + "]//option[text()='" + year + "']");
 
     }
+
+    public static By selectDay(String day, int num) {
+
+        return By.xpath(" (//div[@class='calendar-table']//tr//td[text()='" + day + "'])[" + num + "]");
+
     }
+
+    public static WebElement username_password(String text) {
+        WebElement element = driver.findElement(By.xpath("(//div[contains(., '" + text + "' )])[4]"));
+        return element;
+    }
+
+    public static By demoFilo() {
+
+        return By.xpath("//span[text()='Demo Filo (129)']");
+
+    }
+   /* public static By logout(String text){
+        return By.xpath("//a[contains(.,'"+text+"')]");
+    }
+    public  static By anasayfayaDon(String text){
+        return By.xpath("//a[contains(.,'"+text+"')]");
+    }*/
+}
 
 
 

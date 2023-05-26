@@ -50,6 +50,9 @@ public interface Locator {
     By lRaporlarSubMenu=By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]//ul//li[contains(.,'Grup Bazlı')]");
     By lRaporlarMenu=By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]");
     By LDetaylıFiltre=By.xpath("//span[contains(.,'Detaylı Filtre')]");
+    By lLogoutDemoFilo=By.xpath("//div//a[contains(.,'Çıkış Yap')]");
+    By lAnasayfayaDon=By.xpath("//div//a[@href='/'][contains(.,'Ana sayfaya dön')]");
+
 
 
 
