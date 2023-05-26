@@ -162,7 +162,7 @@ public class MovitaStepdefs extends BaseMovita {
         getScreenshot("Tarih");
         sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "Haziran");
         getScreenshot("İşe baslama");
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "Temuz");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "Temmuz");
         getScreenshot("İş bitiş");
 
     }
