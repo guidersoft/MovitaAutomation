@@ -3,7 +3,7 @@ package stepdefs;
 import Base.BaseMovita;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
 
 import java.util.List;
 import java.util.Map;
@@ -43,7 +43,7 @@ public class LoginFunctionalityStepdefs extends BaseMovita {
 
                 click(lLoginFormSubmitButton);
                 bekle(1000);
-                visible(lVerifyMap);
+                visible(lDemoFilo);
                 getScreenshot("map");
 
             }
@@ -80,11 +80,13 @@ public class LoginFunctionalityStepdefs extends BaseMovita {
 
     @And("user clicks logout")
     public void userClicksLogout() {
+        bekle(500);
         click(lLogOut);
     }
 
     @And("user clicks return the homepage")
     public void userClicksReturnTheHomepage() {
+        bekle(500);
         click(lLoginFormAnaSayfayaDon);
     }
 

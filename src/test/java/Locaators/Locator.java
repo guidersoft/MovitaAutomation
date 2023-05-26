@@ -45,6 +45,8 @@ public interface Locator {
     By lVerifyMap=By.xpath("//span[contains(.,'Raporlar')]");
     By lLogOut= By.xpath("//a[contains(.,'Çıkış Yap')]");
     By lDemoFilo= By.xpath("//span[contains(.,'Demo')]");
+    By lRaporlarMenu=By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]");
+    By lDetaylıFiltre=By.xpath("//span[contains(.,'Detaylı Filtre')]");
 
 
 

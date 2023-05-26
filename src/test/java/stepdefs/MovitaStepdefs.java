@@ -126,7 +126,7 @@ public class MovitaStepdefs extends BaseMovita {
 
     @And("user clicks the detailed filter")
     public void userClicksTheDetailedFilter() {
-       click(LDetaylıFiltre);
+       click(lDetaylıFiltre);
        bekle(500);
     }
     // Login Page

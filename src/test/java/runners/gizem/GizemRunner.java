@@ -11,7 +11,7 @@ import io.cucumber.testng.CucumberOptions;
                 "json:test-output/cucumber-reports/cucumber.json",
                 "html:test-output/cucumber-reports/cucumberreport.html",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
-        // Commit edilmeye çalışıldı.
+
 )
 public class GizemRunner extends AbstractTestNGCucumberTests {
 
