@@ -19,7 +19,14 @@ public class Mov_10 extends BaseMovita {
     By lDetaylıFiltre = By.xpath("//span[contains(.,'Detaylı Filtre')]");
     public static final By lAracDropDownMenu = By.xpath("//span[@role='presentation']");
     public static final By lStartDateDropDownMenu = By.xpath("//div[@class='card']//div[@class='form-group']");
+
     public static final By lHata = By.xpath("//div[@id='toast-container']//div[text()='Kullanıcı Adı Yada Şifre Hatalı']");
+    public static final By lLogout=By.xpath("//a[contains(.,'Çıkış Yap')]");
+    public static final By lDemoFilo=By.xpath("//span[contains(.,'Demo')]");
+    public static final By lLoginFormAnaSayfayaDon = By.xpath("//a[contains(.,'Ana sayfaya dön')]");
+
+
+
     public static By loginFormİnput(String text) {
         return By.xpath("//form[@class='needs-validation mb-2 mt-10']//input[@id='" + text + "']");
 
@@ -73,10 +80,9 @@ public class Mov_10 extends BaseMovita {
         return element;
     }
 
-    public static WebElement username_password(String text) {
-        WebElement element = driver.findElement(By.xpath(("//div[contains(.,'" + text + "')])[4]")));
+    public static WebElement username_password(String text){
+        WebElement element = driver.findElement(By.xpath("(//div[contains(., '"+text+"' )])[4]"));
         return element;
-
     }
 }
 

@@ -110,6 +110,7 @@ public class MovitaStepdefs extends BaseMovita {
     @When("user clicks the login button")
     public void userClicksTheLoginButton() {
         click(homePageMenu("GİRİŞ Yap"));
+
     }
 
     @And("user sends <username> and <password>")
