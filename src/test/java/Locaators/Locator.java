@@ -41,7 +41,10 @@ public interface Locator {
 
     By lSubTitlesKurumsal=By.xpath("//div[text()='Belgelerimiz']");
     By lSubMenuKurumsalVerify=By.xpath("//h1[text()='Bayilik Başvuru']");
-
+     By lHata = By.xpath("//div[@id='toast-container']//div[text()='Kullanıcı Adı Yada Şifre Hatalı']");
+    By lVerifyMap=By.xpath("//span[contains(.,'Raporlar')]");
+    By lLogOut= By.xpath("//a[contains(.,'Çıkış Yap')]");
+    By lDemoFilo= By.xpath("//span[contains(.,'Demo')]");
 
 
 
