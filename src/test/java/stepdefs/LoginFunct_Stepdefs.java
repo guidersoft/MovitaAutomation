@@ -75,4 +75,6 @@ public class LoginFunct_Stepdefs extends BaseMovita {
         click(homePageMenu("Login"));
         getScreenshot("invalid language");
     }
+
+    //Login Page
 }
