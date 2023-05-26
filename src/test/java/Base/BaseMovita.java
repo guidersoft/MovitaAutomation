@@ -36,7 +36,7 @@ public class BaseMovita implements Locator {
     }
 
     public void click(By locator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         click(element);
 
     }
@@ -68,7 +68,7 @@ public class BaseMovita implements Locator {
     public void bekle(long milis) {
         try {
             Thread.sleep(milis);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -86,7 +86,7 @@ public class BaseMovita implements Locator {
 
         try {
             FileUtils.copyFile(source, target);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -106,7 +106,6 @@ public class BaseMovita implements Locator {
     @Override
     public WebElement homePageMenu(String text) {
         WebElement element = driver.findElement(By.xpath("//div[@class='header-row']//div[text()='" + text + "']"));
-
         return element;
     }
 
@@ -147,7 +146,7 @@ public class BaseMovita implements Locator {
                 element.clear();
                 element.sendKeys(text);
                 return true;
-            } catch (java.lang.Exception e1) {
+            } catch (Exception e1) {
                 try {
                     element.clear();
                     new Actions(driver1).moveToElement(element).sendKeys(text).perform();
@@ -276,7 +275,11 @@ public class BaseMovita implements Locator {
         By lSubTitleVerify=By.xpath("//div[@class='col-md-3']//img");
         wait.until(ExpectedConditions.presenceOfElementLocated(lSubTitleVerify));
     }
-
+        public static By resultOfReportWith( String text,String text1){
+        By lResultOfReportWith = By.xpath("//div[@class='dt-buttons']//a[contains(@title,'"+text+"')]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lResultOfReportWith));
+        return lResultOfReportWith;
+    }
 
 }
 

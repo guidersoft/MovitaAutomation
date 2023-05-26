@@ -103,7 +103,7 @@
                 <configuration>
                     <includes>
                         <!--  projede herhangi bir packagede, Runner ile baslayan java dosyalari -->
-                        <include>/RunnerMumin.java</include>
+                        <include>/RunnerErkanCihan.java</include>
                     </includes>
                 </configuration>
             </plugin>
