@@ -45,7 +45,7 @@ public class Mov_10 extends BaseMovita {
     }
 
     public static By resultOfReportWith(String text) {
-        return By.xpath("//div[@class='dt-buttons']//a[contains(@title," + text + ")]");
+        return By.xpath("//div[@class='dt-buttons']//a[contains(@title,'" + text + "')]");
         //div[@class='dt-buttons']//a[contains(@title,Pdf Olarak İndir)]
 
     }

@@ -171,7 +171,7 @@ public class MovitaStepdefs extends BaseMovita {
         Map<String, String> map = table.asMap();
 
         click(Mov_10.resultOfReportWith(map.get("excel")));
-        getScreenshot("exel");
+        getScreenshot("excel");
         bekle(500);
         click(Mov_10.resultOfReportWith(map.get("pdf")));
         getScreenshot("pdf");
