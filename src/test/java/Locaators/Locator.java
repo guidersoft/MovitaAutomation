@@ -42,13 +42,6 @@ public interface Locator {
     By lSubTitlesKurumsal=By.xpath("//div[text()='Belgelerimiz']");
     By lSubMenuKurumsalVerify=By.xpath("//h1[text()='Bayilik Başvuru']");
 
-    //yeni araclar bazlı raporlar
-
-
-
-    By lVerifyMap=By.xpath("//span[contains(.,'Raporlar')]");
-    By lRaporlarSubMenu=By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]//ul//li[contains(.,'Grup Bazlı')]");
-    By lRaporlarMenu=By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]");
     By LDetaylıFiltre=By.xpath("//span[contains(.,'Detaylı Filtre')]");
 
 
