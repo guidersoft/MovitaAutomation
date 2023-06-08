@@ -12,6 +12,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import pageObjects.Mov_10;
 import readers.MyPojo;
 
 import java.io.*;
@@ -22,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseMovita implements Locator {
-    protected static WebDriver driver;
-    protected static  WebDriverWait wait;
+    protected  static WebDriver driver;
+    protected static WebDriverWait wait;
 
     {
         driver =Driver.getDriver();
@@ -35,13 +36,13 @@ public class BaseMovita implements Locator {
         driver.get(url);
     }
 
-    public void click(By locator) {
+    public void   click(By locator) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
         click(element);
 
     }
 
-    public void click(WebElement element) {
+   public void click(WebElement element) {
         element.click();
 
     }
@@ -272,10 +273,18 @@ public class BaseMovita implements Locator {
                 .perform();
     }
     public void visibleVerifyWithSubtitle(String text) {
-        By lSubTitleVerify=By.xpath("//div[@class='col-md-3']//img");
+        By lSubTitleVerify = By.xpath("//div[@class='col-md-3']//img");
         wait.until(ExpectedConditions.presenceOfElementLocated(lSubTitleVerify));
+
+
     }
 
-
 }
+
+
+
+
+
+
+
 
