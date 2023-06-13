@@ -12,6 +12,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import pageObjects.Mov_10;
 import readers.MyPojo;
 
 import java.io.*;
@@ -22,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseMovita implements Locator {
-    protected static WebDriver driver;
-    protected static  WebDriverWait wait;
+    protected  static WebDriver driver;
+    protected static WebDriverWait wait;
 
     {
         driver =Driver.getDriver();
@@ -41,7 +42,7 @@ public class BaseMovita implements Locator {
 
     }
 
-    public void click(WebElement element) {
+   public void click(WebElement element) {
         element.click();
 
     }
@@ -106,6 +107,7 @@ public class BaseMovita implements Locator {
     @Override
     public WebElement homePageMenu(String text) {
         WebElement element = driver.findElement(By.xpath("//div[@class='header-row']//div[text()='" + text + "']"));
+
         return element;
     }
 
@@ -146,7 +148,7 @@ public class BaseMovita implements Locator {
                 element.clear();
                 element.sendKeys(text);
                 return true;
-            } catch (Exception e1) {
+            } catch (java.lang.Exception e1) {
                 try {
                     element.clear();
                     new Actions(driver1).moveToElement(element).sendKeys(text).perform();
