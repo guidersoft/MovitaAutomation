@@ -43,6 +43,9 @@ public interface Locator {
     By lSubMenuKurumsalVerify=By.xpath("//h1[text()='Bayilik Başvuru']");
 
     By LDetaylıFiltre=By.xpath("//span[contains(.,'Detaylı Filtre')]");
+    By lLogoutDemoFilo=By.xpath("//div//a[contains(.,'Çıkış Yap')]");
+    By lAnasayfayaDon=By.xpath("//div//a[@href='/'][contains(.,'Ana sayfaya dön')]");
+
 
 
 

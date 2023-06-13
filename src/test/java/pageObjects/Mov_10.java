@@ -1,14 +1,13 @@
 package pageObjects;
 
 import Base.BaseMovita;
-import Utilities.Driver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDrive
+
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import org.openqa.selenium.WebDriver;
 
 public class Mov_10 extends BaseMovita {
 
@@ -20,10 +19,12 @@ public class Mov_10 extends BaseMovita {
     public static final By lAracDropDownMenu = By.xpath("//span[@role='presentation']");
     public static final By lStartDateDropDownMenu = By.xpath("//div[@class='card']//div[@class='form-group']");
 
+
     public static final By lHata = By.xpath("//div[@id='toast-container']//div[text()='Kullanıcı Adı Yada Şifre Hatalı']");
     public static final By lLogout=By.xpath("//a[contains(.,'Çıkış Yap')]");
     public static final By lDemoFilo=By.xpath("//span[contains(.,'Demo')]");
     public static final By lLoginFormAnaSayfayaDon = By.xpath("//a[contains(.,'Ana sayfaya dön')]");
+
 
 
 
@@ -46,6 +47,40 @@ public class Mov_10 extends BaseMovita {
 
     public static By resultOfReportWith(String text) {
         return By.xpath("//div[@class='dt-buttons']//a[contains(@title,'" + text + "')]");
+
+
+    }
+
+    public static By aracSelect(String text) {
+        return By.xpath("//div[@class='card']//select[@id='aracSelect']//option[contains(.,'" + text + "')]");
+
+
+    }
+
+    public static By selectDateMenu(String text) {
+        return By.xpath("//div[@class='form-group']//input[@id='" + text + "']");
+
+    }
+
+   
+
+    public static WebElement username_password(String text) {
+        WebElement element = driver.findElement(By.xpath("(//div[contains(., '" + text + "' )])[4]"));
+        return element;
+    }
+
+    public static By demoFilo() {
+
+        return By.xpath("//span[text()='Demo Filo (129)']");
+
+    }
+   /* public static By logout(String text){
+        return By.xpath("//a[contains(.,'"+text+"')]");
+    }
+    public  static By anasayfayaDon(String text){
+        return By.xpath("//a[contains(.,'"+text+"')]");
+    }*/
+
         //div[@class='dt-buttons']//a[contains(@title,Pdf Olarak İndir)]
 
     }
@@ -84,8 +119,5 @@ public class Mov_10 extends BaseMovita {
         WebElement element = driver.findElement(By.xpath("(//div[contains(., '"+text+"' )])[4]"));
         return element;
     }
-}
-
-
 
 
