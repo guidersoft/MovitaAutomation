@@ -75,4 +75,14 @@ Feature: HomePage
       | is baslama | is_baslama_filter |
       | is bitis   | is_bitis_filter   |
 
+    And user clicks the result of the report
+      | exel   | Excel Olarak İndir |
+      | pdf    | Pdf Olarak İndir   |
+      | yazıcı | Yazıcıdan Çıkart   |
+    And user select vehicle
+    And user clicks form group of start of date
+    And user select start of date
+    And user clicks form group of finish of date
+    And user select finish of date
+    And user clicks the result of the report
 
