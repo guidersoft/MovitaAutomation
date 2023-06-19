@@ -23,3 +23,4 @@ Feature: FunctionalityOfLogin
     And user clicks the enter button
     And user clicks the english language button
     And user clicks the english login button
+

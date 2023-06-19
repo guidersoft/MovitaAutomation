@@ -47,8 +47,4 @@ public interface Locator {
     By lDemoFilo= By.xpath("//span[contains(.,'Demo')]");
     By lRaporlarMenu=By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]");
     By lDetaylıFiltre=By.xpath("//span[contains(.,'Detaylı Filtre')]");
-
-
-
-
 }
