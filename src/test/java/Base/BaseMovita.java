@@ -12,7 +12,6 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import pageObjects.Mov_10;
 import readers.MyPojo;
 
 import java.io.*;
@@ -23,11 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseMovita implements Locator {
-    protected  static WebDriver driver;
+    protected static WebDriver driver;
     protected static WebDriverWait wait;
 
     {
-        driver =Driver.getDriver();
+        driver = Driver.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
@@ -37,12 +36,12 @@ public class BaseMovita implements Locator {
     }
 
     public void click(By locator) {
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
         click(element);
 
     }
 
-   public void click(WebElement element) {
+    public void click(WebElement element) {
         element.click();
 
     }
@@ -69,7 +68,7 @@ public class BaseMovita implements Locator {
     public void bekle(long milis) {
         try {
             Thread.sleep(milis);
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
@@ -87,7 +86,7 @@ public class BaseMovita implements Locator {
 
         try {
             FileUtils.copyFile(source, target);
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -100,8 +99,6 @@ public class BaseMovita implements Locator {
                 .build()
                 .perform();
     }
-
-
 
 
     @Override
@@ -219,21 +216,25 @@ public class BaseMovita implements Locator {
             throw new RuntimeException(e);
         }
     }
+
     public void visibleVerifyWithSubtitleKurumsal(String text) {
-        By lSubTitleVerify=By.xpath("//div//h1[contains(.,'"+text+"')]");
+        By lSubTitleVerify = By.xpath("//div//h1[contains(.,'" + text + "')]");
         wait.until(ExpectedConditions.presenceOfElementLocated(lSubTitleVerify));
     }
+
     public void visibleVerifyWithSubtitleUrunler(String text) {
-        By lSubTitleVerify=By.xpath("//div//h3[contains(.,'"+text+"')]");
+        By lSubTitleVerify = By.xpath("//div//h3[contains(.,'" + text + "')]");
         wait.until(ExpectedConditions.visibilityOfElementLocated(lSubTitleVerify));
     }
+
     public void visibleVerifyWithSubtitleCozumler(String text) {
 
-        By lSubTitleVerify=By.xpath("//h2[@class='d-flex'][contains(.,' "+text+"')]");
+        By lSubTitleVerify = By.xpath("//h2[@class='d-flex'][contains(.,' " + text + "')]");
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(lSubTitleVerify));
 
 
     }
+
     public WebElement MainSubtitle(String text) {
         WebElement element = driver.findElement(By.xpath("//ul[@class='sub-menu-container']//div[text()='" + text + "']"));
         wait.until(ExpectedConditions.visibilityOf(element));
@@ -242,46 +243,73 @@ public class BaseMovita implements Locator {
 
     public void assertChangeColorMainTitle(String text) {
 
-        String beforeColorMainTitle=homePageMenu(text).getCssValue("color");
+        String beforeColorMainTitle = homePageMenu(text).getCssValue("color");
         System.out.println(beforeColorMainTitle);
         hoverOver(homePageMenu(text));
-        String afterColorMainTitle=homePageMenu(text).getCssValue("color");
+        String afterColorMainTitle = homePageMenu(text).getCssValue("color");
         System.out.println(afterColorMainTitle);
-        Assert.assertNotEquals(beforeColorMainTitle,afterColorMainTitle);
+        Assert.assertNotEquals(beforeColorMainTitle, afterColorMainTitle);
     }
 
     public void assertChangeColorSubTitle(String text) {
-        String beforeColorMainTitle=MainSubtitle(text).getCssValue("color");
+        String beforeColorMainTitle = MainSubtitle(text).getCssValue("color");
         hoverOver(MainSubtitle(text));
-        String afterColorMainTitle=MainSubtitle(text).getCssValue("color");
-        Assert.assertNotEquals(beforeColorMainTitle,afterColorMainTitle);
+        String afterColorMainTitle = MainSubtitle(text).getCssValue("color");
+        Assert.assertNotEquals(beforeColorMainTitle, afterColorMainTitle);
     }
+
     public void hoverAll(By locator) {
         List<WebElement> list = driver.findElements(locator);
 
         for (WebElement element : list) {
             new Actions(driver)
-                    .moveToElement(element,-20,0)
+                    .moveToElement(element, -20, 0)
                     .build()
                     .perform();
         }
     }
+
     public void hoverOver(WebElement element) {
         new Actions(driver)
-                .moveToElement(element,-20,0)
+                .moveToElement(element, -20, 0)
                 .pause(100)
                 .build()
                 .perform();
     }
+
     public void visibleVerifyWithSubtitle(String text) {
-        By lSubTitleVerify=By.xpath("//div[@class='col-md-3']//img");
+        By lSubTitleVerify = By.xpath("//div[@class='col-md-3']//img");
         wait.until(ExpectedConditions.presenceOfElementLocated(lSubTitleVerify));
     }
-        public static By resultOfReportWith( String text,String text1){
-        By lResultOfReportWith = By.xpath("//div[@class='dt-buttons']//a[contains(@title,'"+text+"')]");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(lResultOfReportWith));
-        return lResultOfReportWith;
+
+
+    public void scroll() {
+        JavascriptExecutor js = ((JavascriptExecutor) driver);
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        //js.executeScript("window.scrollBy(0, 500)");
+        //js.executeScript("window.scrollTo(500, 500);");
+        //js.executeScript("arguments[0].scrollIntoView();", element2);
     }
 
-}
+    public void changeColor(String methods, String colour, By locator) {
+        String beforeColor = "";
+        String afterColor = "";
+        switch (methods) {
+            case "hoverover":
+                beforeColor = driver.findElement(locator).getCssValue(colour);
+                hoverOver(driver.findElement(locator));
+                afterColor = driver.findElement(locator).getCssValue(colour);
+                Assert.assertNotEquals(beforeColor, afterColor);
+                break;
+            case "click":
+                beforeColor = driver.findElement(locator).getCssValue(colour);
+                click(driver.findElement(locator));
+                afterColor = driver.findElement(locator).getCssValue(colour);
+                Assert.assertNotEquals(beforeColor, afterColor);
+                break;
 
+
+        }
+
+    }
+}
