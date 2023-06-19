@@ -2,12 +2,8 @@ package pageObjects;
 
 import Base.BaseMovita;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDrive
-
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.WebDriver;
 
 public class Mov_10 extends BaseMovita {
 
@@ -18,15 +14,6 @@ public class Mov_10 extends BaseMovita {
     By lDetaylıFiltre = By.xpath("//span[contains(.,'Detaylı Filtre')]");
     public static final By lAracDropDownMenu = By.xpath("//span[@role='presentation']");
     public static final By lStartDateDropDownMenu = By.xpath("//div[@class='card']//div[@class='form-group']");
-
-
-    public static final By lHata = By.xpath("//div[@id='toast-container']//div[text()='Kullanıcı Adı Yada Şifre Hatalı']");
-    public static final By lLogout=By.xpath("//a[contains(.,'Çıkış Yap')]");
-    public static final By lDemoFilo=By.xpath("//span[contains(.,'Demo')]");
-    public static final By lLoginFormAnaSayfayaDon = By.xpath("//a[contains(.,'Ana sayfaya dön')]");
-
-
-
 
     public static By loginFormİnput(String text) {
         return By.xpath("//form[@class='needs-validation mb-2 mt-10']//input[@id='" + text + "']");
@@ -48,7 +35,6 @@ public class Mov_10 extends BaseMovita {
     public static By resultOfReportWith(String text) {
         return By.xpath("//div[@class='dt-buttons']//a[contains(@title,'" + text + "')]");
 
-
     }
 
     public static By aracSelect(String text) {
@@ -62,7 +48,22 @@ public class Mov_10 extends BaseMovita {
 
     }
 
-   
+    public static By selectMonth(String monthselect, String month, int num) {
+        return By.xpath("(//div[@class='calendar-table']//select[@class='" + monthselect + "'])[" + num + "]//option[text()='" + month + "']");
+
+    }
+
+    public static By selectYear(String yearselect, String year, int num) {
+
+        return By.xpath("(//div[@class='calendar-table']//select[@class='" + yearselect + "'])[" + num + "]//option[text()='" + year + "']");
+
+    }
+
+    public static By selectDay(String day, int num) {
+
+        return By.xpath(" (//div[@class='calendar-table']//tr//td[text()='" + day + "'])[" + num + "]");
+
+    }
 
     public static WebElement username_password(String text) {
         WebElement element = driver.findElement(By.xpath("(//div[contains(., '" + text + "' )])[4]"));
@@ -80,44 +81,4 @@ public class Mov_10 extends BaseMovita {
     public  static By anasayfayaDon(String text){
         return By.xpath("//a[contains(.,'"+text+"')]");
     }*/
-
-        //div[@class='dt-buttons']//a[contains(@title,Pdf Olarak İndir)]
-
-    }
-
-
-    public static WebElement aracSelect(String text) {
-        WebElement element = driver.findElement(By.xpath("//div[@class='card']//select[@id='aracSelect']//option[contains(.,'" + text + "')]"));
-        return element;
-
-    }
-
-    public static By selectDateMenu(String text) {
-        return By.xpath("//div[@class='form-group']//input[@id='" + text + "']");
-
-    }
-
-    public static WebElement selectMonth() {
-
-
-        return selectMonth(1);
-    }
-    public static WebElement selectMonth(int index) {
-
-        WebElement element = driver.findElement(By.xpath("(//select[@class='monthselect'])["+index+"]"));
-        return element;
-    }
-
-    public static WebElement selectYear() {
-
-        WebElement element = driver.findElement(By.xpath("//select[@class='yearselect']"));
-
-        return element;
-    }
-
-    public static WebElement username_password(String text){
-        WebElement element = driver.findElement(By.xpath("(//div[contains(., '"+text+"' )])[4]"));
-        return element;
-    }
-
-
+}
