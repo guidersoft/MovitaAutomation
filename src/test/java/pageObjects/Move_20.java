@@ -9,9 +9,6 @@ import org.testng.Assert;
 import java.util.List;
 
 public class Move_20 extends BaseMovita {
-    public static final By lHeadingBlock=By.xpath("//span[contains(.,'Misyonumuz')]");
-
-    public static final By lHeadingBlock2=By.xpath("//section[@id='content']//h4");
 
     public static final By lIcon=By.xpath("//div[@id='gotoTop']");
 
