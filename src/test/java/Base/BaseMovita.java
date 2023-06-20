@@ -42,30 +42,38 @@ public class BaseMovita implements Locator {
     }
 
     public void click(WebElement element) {
-        element.click();
+        wait.until(driver1 -> {
+            try {
+
+                element.click();
+                return true;
+            } catch (java.lang.Exception e1) {
+                try {
+                    new Actions(driver1).moveToElement(element).click();
+                    return true;
+                } catch (java.lang.Exception e2) {
+                    try {
+                        ((JavascriptExecutor) driver1).executeScript("arguments[0].click()'", element);
+                        return true;
+                    } catch (java.lang.Exception e3) {
+                        return false;
+                    }
+                }
+            }
+        });
 
     }
 
     public void visible(By locator) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        visible(element);
     }
 
     public void visible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void assertElement(By locator, String str) {
-
-        WebElement element = driver.findElement(locator);
-        String text = element.getText();
-        System.out.println(text);
-        //bekle(1000);
-        Assert.assertEquals(text, str);
-
-
-    }
-
-    public void bekle(long milis) {
+       public void bekle(long milis) {
         try {
             Thread.sleep(milis);
         } catch (InterruptedException e) {
@@ -128,10 +136,6 @@ public class BaseMovita implements Locator {
                 .perform();
     }
 
-    public void hoverOverByAction(By locator) {
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        hoverOverByAction(element);
-    }
 
     public By xpath(String locator, String text) {
         return By.xpath(String.format(locator, text));
@@ -217,29 +221,12 @@ public class BaseMovita implements Locator {
         }
     }
 
-    public void visibleVerifyWithSubtitleKurumsal(String text) {
-        By lSubTitleVerify = By.xpath("//div//h1[contains(.,'" + text + "')]");
-        wait.until(ExpectedConditions.presenceOfElementLocated(lSubTitleVerify));
-    }
-
-    public void visibleVerifyWithSubtitleUrunler(String text) {
-        By lSubTitleVerify = By.xpath("//div//h3[contains(.,'" + text + "')]");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(lSubTitleVerify));
-    }
-
-    public void visibleVerifyWithSubtitleCozumler(String text) {
-
-        By lSubTitleVerify = By.xpath("//h2[@class='d-flex'][contains(.,' " + text + "')]");
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(lSubTitleVerify));
-
-
-    }
-
-    public WebElement MainSubtitle(String text) {
+      public WebElement MainSubtitle(String text) {
         WebElement element = driver.findElement(By.xpath("//ul[@class='sub-menu-container']//div[text()='" + text + "']"));
         wait.until(ExpectedConditions.visibilityOf(element));
         return element;
     }
+
 
     public void assertChangeColorMainTitle(String text) {
 
@@ -257,6 +244,7 @@ public class BaseMovita implements Locator {
         String afterColorMainTitle = MainSubtitle(text).getCssValue("color");
         Assert.assertNotEquals(beforeColorMainTitle, afterColorMainTitle);
     }
+
 
     public void hoverAll(By locator) {
         List<WebElement> list = driver.findElements(locator);
@@ -305,6 +293,27 @@ public class BaseMovita implements Locator {
                 beforeColor = driver.findElement(locator).getCssValue(colour);
                 click(driver.findElement(locator));
                 afterColor = driver.findElement(locator).getCssValue(colour);
+                Assert.assertNotEquals(beforeColor, afterColor);
+                break;
+
+
+        }
+
+    }
+    public void changeColor(String methods, String colour, WebElement element) {
+        String beforeColor = "";
+        String afterColor = "";
+        switch (methods) {
+            case "hoverover":
+                beforeColor = element.getCssValue(colour);
+                hoverOver(element);
+                afterColor = element.getCssValue(colour);
+                Assert.assertNotEquals(beforeColor, afterColor);
+                break;
+            case "click":
+                beforeColor = element.getCssValue(colour);
+                click(element);
+                afterColor = element.getCssValue(colour);
                 Assert.assertNotEquals(beforeColor, afterColor);
                 break;
 
