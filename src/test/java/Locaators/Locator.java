@@ -41,14 +41,10 @@ public interface Locator {
 
     By lSubTitlesKurumsal=By.xpath("//div[text()='Belgelerimiz']");
     By lSubMenuKurumsalVerify=By.xpath("//h1[text()='Bayilik Başvuru']");
-
-    By LDetaylıFiltre=By.xpath("//span[contains(.,'Detaylı Filtre')]");
-    By lLogoutDemoFilo=By.xpath("//div//a[contains(.,'Çıkış Yap')]");
-    By lAnasayfayaDon=By.xpath("//div//a[@href='/'][contains(.,'Ana sayfaya dön')]");
-
-
-
-
-
-
+     By lHata = By.xpath("//div[@id='toast-container']//div[text()='Kullanıcı Adı Yada Şifre Hatalı']");
+    By lVerifyMap=By.xpath("//span[contains(.,'Raporlar')]");
+    By lLogOut= By.xpath("//a[contains(.,'Çıkış Yap')]");
+    By lDemoFilo= By.xpath("//span[contains(.,'Demo')]");
+    By lRaporlarMenu=By.xpath("//li[@class='nav-item has-sub' and contains(.,'Raporlar')]");
+    By lDetaylıFiltre=By.xpath("//span[contains(.,'Detaylı Filtre')]");
 }
