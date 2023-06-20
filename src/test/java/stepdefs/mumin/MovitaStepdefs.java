@@ -1,4 +1,4 @@
-package stepdefs.mümin;
+package stepdefs;
 
 
 import Base.BaseMovita;
@@ -136,12 +136,12 @@ public class MovitaStepdefs extends BaseMovita {
 
     @And("verify with map")
     public void verifyWithMap() {
-        visible(lVerifyMap);
+        visible(Mov_10.lVerifyMap);
     }
 
     @And("user click raporlar menu")
     public void userClickRaporlarMenu() {
-        click(lRaporlarMenu);
+        click(Mov_10.lRaporlarMenu);
     }
 
     @And("user clicks the base tool report")
@@ -158,15 +158,15 @@ public class MovitaStepdefs extends BaseMovita {
     @And("user sends detailed filter of sub menu")
     public void userSendsDetailedFilterOfSubMenu(DataTable table) {
         Map<String, String> map = table.asMap();
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "2023.05.15");
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "2023.05.15");
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "2023.05.15");
-
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "2023.05.08");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "2023.05.08");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "2023.05.08");
         sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "Mayıs");
         getScreenshot("Tarih");
         sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "Haziran");
         getScreenshot("İşe baslama");
         sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "Temmuz");
+        getScreenshot("İş bitiş");
         getScreenshot("İş bitiş");
 
     }
@@ -289,10 +289,8 @@ public class MovitaStepdefs extends BaseMovita {
     }
 
 
-    @And("uuser clicks on create report")
-    public void uuserClicksOnCreateReport() {
-        click(Mov_10.raporlarSubMenu("Rapor Al"));
     }
+}
 
     @And("user sends username and password and verify")
     public void userSendsUsernameAndPasswordAndVerify(DataTable table) {
