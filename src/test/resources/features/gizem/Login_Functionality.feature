@@ -17,10 +17,7 @@ Feature: FunctionalityOfLogin
       | password   |             | false  |
       |            | password    | false  |
       | demomovita | 1192movita  | true   |
-    And user clicks demo filo
+    And user click demoFilo Button
     And user clicks logout
     And user clicks return the homepage
-    And user clicks the enter button
     And user clicks the english language button
-    And user clicks the english login button
-

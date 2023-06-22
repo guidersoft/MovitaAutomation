@@ -7,11 +7,21 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pageObjects.Mov_10;
+import pageObjects.Move_12;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import static pageObjects.Mov_10.lRaporlarMenu;
+import static pageObjects.Mov_10.lVerifyMap;
 
 public class MovitaStepdefs extends BaseMovita {
 
@@ -35,6 +45,19 @@ public class MovitaStepdefs extends BaseMovita {
         getScreenshot("Mobil Vasıta");
     }
 
+    @And("user clicks the english language button")
+    public void userClicksTheEnglishLanguageButton() {
+
+        //new Actions(driver).moveToElement(driver.findElement(lEnglishLangNew)).click();
+
+        click(lEnglishLang);
+    }
+
+    @And("user String verify English → “Mobile Vehicle Tracking System” yazisini verify et")
+    public void userStringVerifyEnglishMobileVehicleTrackingSystemYazisiniVerifyEt() {
+        visible(lMobilVasıtaEnglish);
+        getScreenshot("Mobile Vehicle Tracking System");
+    }
     @Given("user clicks the enter button")
     public void userClicksTheEnterButton() {
         click(lEnterButton);
@@ -48,17 +71,6 @@ public class MovitaStepdefs extends BaseMovita {
     @And("user String verify Türkce → “Mobil Vasita izleme takip Sistemi” yazisini verify et")
     public void userStringVerifyTürkceMobilVasitaIzlemeTakipSistemiYazisiniVerifyEt() {
         visible(lMobilVasıtaTurkish);
-    }
-
-    @And("user clicks the english language button")
-    public void userClicksTheEnglishLanguageButton() {
-        click(lEnglishLang);
-    }
-
-    @And("user String verify English → “Mobile Vehicle Tracking System” yazisini verify et")
-    public void userStringVerifyEnglishMobileVehicleTrackingSystemYazisiniVerifyEt() {
-        visible(lMobilVasıtaEnglish);
-        getScreenshot("Mobile Vehicle Tracking System");
     }
 
     @When("user hover over the homepage title and title color should be changeable")
@@ -93,8 +105,9 @@ public class MovitaStepdefs extends BaseMovita {
 
     @And("The {string} and{string} colours should be change")
     public void theAndColoursShouldBeChange(String mainTitle, String subTitle) {
-        assertChangeColorMainTitle(mainTitle);
-        assertChangeColorSubTitle(subTitle);
+
+        changeColor("hoverover","color",homePageMenu(mainTitle));
+        changeColor("hoverover","color",MainSubtitle(subTitle));
     }
 
     @Then("verify the subtitle with {string}")
@@ -102,62 +115,5 @@ public class MovitaStepdefs extends BaseMovita {
         visibleVerifyWithSubtitle(text);
     }
 
-    @When("user clicks the login button")
-    public void userClicksTheLoginButton() {
-        click(homePageMenu("GİRİŞ Yap"));
-    }
 
-    @And("user sends <username> and <password>")
-    public void userSendsUsernameAndPassword(DataTable table) {
-        Map<String, String> map = table.asMap();
-        String username = map.get("username");
-        String password = map.get("password");
-        sendKeys(Mov_10.loginFormİnput("username"), username);
-        sendKeys(Mov_10.loginFormİnput("password"), password);
-
-    }
-
-    @And("user clicks login form login button")
-    public void userClicksLoginFormLoginButton() {
-        click(lLoginFormSubmitButton);
-    }
-
-
-    @And("verify with map")
-    public void verifyWithMap() {
-        visible(lVerifyMap);
-    }
-
-    @And("user click raporlar menu")
-    public void userClickRaporlarMenu() {
-        click(lRaporlarMenu);
-    }
-
-    @And("user clicks the base tool report")
-    public void userClicksTheBaseToolReport() {
-        click(Mov_10.raporlarSubMenu("Araç Bazlı Rapor"));
-    }
-
-    @And("user clicks the detailed filter")
-    public void userClicksTheDetailedFilter() {
-        click(lDetaylıFiltre);
-        bekle(500);
-    }
-    // Login Page
-
-    @And("user sends detailed filter of sub menu")
-    public void userSendsDetailedFilterOfSubMenu(DataTable table) {
-        Map<String, String> map = table.asMap();
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "2023.05.15");
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "2023.05.15");
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "2023.05.15");
-
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "Mayıs");
-        getScreenshot("Tarih");
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "Haziran");
-        getScreenshot("İşe baslama");
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "Temmuz");
-        getScreenshot("İş bitiş");
-
-    }
 }
