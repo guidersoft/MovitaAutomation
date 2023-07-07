@@ -4,120 +4,29 @@ package stepdefs;
 import Base.BaseMovita;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pageObjects.Mov_10;
 import pageObjects.Move_12;
+import pageObjects.Move_20;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static pageObjects.Mov_10.lRaporlarMenu;
-import static pageObjects.Mov_10.lVerifyMap;
+import static pageObjects.Mov_10.*;
 
-public class MovitaStepdefs extends BaseMovita {
 
-    @Given("users navigate to {string}")
-    public void usersNavigateTo(String url) {
-        driver.get(url);
-    }
-
-    @When("users clicked the movita logo")
-    public void usersClickedTheMovitaLogo() {
-        click(llogo);
-    }
-
-    @And("Mobile Vehicle Tracking System shoould be visible")
-    public void mobileVehicleTrackingSystemShoouldBeVisible() {
-        visible(lMobilVasıtaTurkish);
-    }
-
-    @Then("should be success")
-    public void shouldBeSuccess() {
-        getScreenshot("Mobil Vasıta");
-    }
-
-    @Given("user clicks the enter button")
-    public void userClicksTheEnterButton() {
-        click(lEnterButton);
-    }
-
-    @And("user clicks the Turkish language button")
-    public void userClicksTheTurkishLanguageButton() {
-        click(lTurkishLang);
-    }
-
-    @And("user String verify Türkce → “Mobil Vasita izleme takip Sistemi” yazisini verify et")
-    public void userStringVerifyTürkceMobilVasitaIzlemeTakipSistemiYazisiniVerifyEt() {
-        visible(lMobilVasıtaTurkish);
-    }
-
-    @And("user clicks the english language button")
-    public void userClicksTheEnglishLanguageButton() {
-        click(lEnterButton);
-        click(lEnglishLang);
-    }
-
-    @And("user String verify English → “Mobile Vehicle Tracking System” yazisini verify et")
-    public void userStringVerifyEnglishMobileVehicleTrackingSystemYazisiniVerifyEt() {
-        visible(lMobilVasıtaEnglish);
-        getScreenshot("Mobile Vehicle Tracking System");
-    }
-
-    @When("user hover over the homepage title and title color should be changeable")
-    public void userHoverOverTheHomepageTitleAndTitleColorShouldBeChangeable() {
-
-        WebElement element = driver.findElement(lAnaSayfa);
-        String beforeColor = element.getCssValue("color");
-        hoverAll(lAnaSayfa);
-        String afterColor = element.getCssValue("color");
-        Assert.assertNotEquals(beforeColor, afterColor);
-    }
-
-    @And("home title should be clickable")
-    public void homeTitleShouldBeClickable() {
-        click(lAnaSayfa);
-    }
-
-    @When("users hover over on the {string}")
-    public void usersHoverOverOnThe(String mainTitle) {
-        hoverOver(homePageMenu(mainTitle));
-    }
-
-    @And("hover over the  {string}")
-    public void hoverOverThe(String subTitle) {
-        hoverOver(MainSubtitle(subTitle));
-    }
-
-    @And("The user {string} the subTitle")
-    public void theUserTheSubTitle(String text) {
-        click(MainSubtitle(text));
-    }
-
-    @And("The {string} and{string} colours should be change")
-    public void theAndColoursShouldBeChange(String mainTitle, String subTitle) {
-        assertChangeColorMainTitle(mainTitle);
-        assertChangeColorSubTitle(subTitle);
-    }
-
-    @Then("verify the subtitle with {string}")
-    public void verifyTheSubtitleWith(String text) {
-        visibleVerifyWithSubtitle(text);
-    }
-
+public class Login_Functionality_Stepdefs extends BaseMovita {
     @When("user clicks the login button")
     public void userClicksTheLoginButton() {
         click(homePageMenu("GİRİŞ Yap"));
     }
-
     @And("user sends <username> and <password>")
     public void userSendsUsernameAndPassword(DataTable table) {
         Map<String, String> map = table.asMap();
@@ -127,53 +36,79 @@ public class MovitaStepdefs extends BaseMovita {
         sendKeys(Mov_10.loginFormİnput("password"), password);
 
     }
-
     @And("user clicks login form login button")
     public void userClicksLoginFormLoginButton() {
         click(lLoginFormSubmitButton);
     }
 
-
     @And("verify with map")
     public void verifyWithMap() {
-        visible(Mov_10.lVerifyMap);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        System.out.println(screenSize);
+        visible(lDemoFilo);
+    }
+
+    @And("user click pizza menu")
+    public void userClickPizzaMenu() {
+        By lPizzaMenuActive = By.xpath("(//a[@class='nav-link nav-menu-main menu-toggle hidden-xs is-active'])[2]");
+        String hiden="(//a[@class='nav-link nav-menu-main menu-toggle hidden-xs'])[2]";
+
+        if (hiden.equals(hiden)){
+            click(lPizzaMenu);
+            click(lRaporlarMenu);
+            click(Mov_10.raporlarSubMenu("Araç Bazlı Rapor"));
+
+        }else {
+            click(lRaporlarMenu);
+            click(Mov_10.raporlarSubMenu("Araç Bazlı Rapor"));
+
+
+        }
+
+    }
+    @And("user clicks detailed report")
+    public void userClicksDetailedReport() {
+        userClicksFormGroupOfStartOfDate();
+        userSelectStartOfDate();
+        userClicksFormGroupOfFinishOfDate();
+        userSelectFinishOfDate();
+        click(Mov_10.raporlarSubMenu("Rapor Al"));
     }
 
     @And("user click raporlar menu")
     public void userClickRaporlarMenu() {
-        click(Mov_10.lRaporlarMenu);
+        click(lRaporlarMenu);
     }
 
     @And("user clicks the base tool report")
     public void userClicksTheBaseToolReport() {
         click(Mov_10.raporlarSubMenu("Araç Bazlı Rapor"));
-    }
 
+    }
     @And("user clicks the detailed filter")
     public void userClicksTheDetailedFilter() {
-        click(LDetaylıFiltre);
         bekle(500);
-    }
+        click(LDetaylıFiltre);
 
+    }
     @And("user sends detailed filter of sub menu")
     public void userSendsDetailedFilterOfSubMenu(DataTable table) {
         Map<String, String> map = table.asMap();
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "2023.05.08");
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "2023.05.08");
-        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "2023.05.08");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "2023.05.15");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "2023.05.15");
+        sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "2023.05.15");
+
         sendKeys(Mov_10.detailedFilterSubMenu(map.get("tarih")), "Mayıs");
         getScreenshot("Tarih");
         sendKeys(Mov_10.detailedFilterSubMenu(map.get("is baslama")), "Haziran");
         getScreenshot("İşe baslama");
         sendKeys(Mov_10.detailedFilterSubMenu(map.get("is bitis")), "Temmuz");
         getScreenshot("İş bitiş");
-        getScreenshot("İş bitiş");
 
     }
 
     @And("user clicks the result of the report")
     public void userClicksTheResultOfTheReport(DataTable table) {
-
 
         Map<String, String> map = table.asMap();
 
@@ -237,7 +172,6 @@ public class MovitaStepdefs extends BaseMovita {
         click(Mov_10.selectDateMenu("tarih1"));
 
     }
-
     @And("user select start of date")
     public void userSelectStartOfDate() {
         /*Select select = new Select(Mov_10.selectMonth());
@@ -257,17 +191,14 @@ public class MovitaStepdefs extends BaseMovita {
 
         bekle(3000);
     }
-
     @And("user clicks form group of finish of date")
     public void userClicksFormGroupOfFinishOfDate() {
         click(Mov_10.selectDateMenu("tarih2"));
 
     }
 
-
     @And("user select finish of date")
     public void userSelectFinishOfDate() {
-
 
         Select select2 = new Select(driver.findElement(By.xpath("//select[@class='monthselect']")));
         select2.selectByValue("9");
@@ -287,10 +218,15 @@ public class MovitaStepdefs extends BaseMovita {
 
 
     }
-
+    @And("user clicks report")
+    public void userClicksReport() {
+        click(Mov_10.raporlarSubMenu("Rapor Al"));
 
     }
-}
+    @And("uuser clicks on create report")
+    public void uuserClicksOnCreateReport() {
+        click(Mov_10.raporlarSubMenu("Rapor Al"));
+    }
 
     @And("user sends username and password and verify")
     public void userSendsUsernameAndPasswordAndVerify(DataTable table) {
@@ -302,7 +238,6 @@ public class MovitaStepdefs extends BaseMovita {
             bekle(1000);
             sendKeys(Mov_10.loginFormİnput("username"), map.get("username"));
             sendKeys(Mov_10.loginFormİnput("password"), map.get("password"));
-
 
             if (map.get("verify").equalsIgnoreCase("false")) {
                 click(lLoginFormSubmitButton);
@@ -331,7 +266,7 @@ public class MovitaStepdefs extends BaseMovita {
 
                 click(lLoginFormSubmitButton);
                 bekle(1000);
-                visible(lVerifyMap);
+                visible(lDemoFilo);
                 getScreenshot("map");
 
             }
@@ -354,15 +289,10 @@ public class MovitaStepdefs extends BaseMovita {
         bekle(1000);
         click(lAnasayfayaDon);
     }
-
-
-
     @And("user clicks the english login button")
     public void userClicksTheEnglishLoginButton() {
         click(Mov_10.lMobilVasıtaEnglish);
     }
-
-
     @And("user clicks to {string} of the reports and subtitle colours should be changeable")
     public void userClicksToOfTheReportsAndSubtitleColoursShouldBeChangeable(String subtitle) {
         /*  List<WebElement> elements = driver.findElements(Mov_12_SmokeTest.raporlarSubtitle);
@@ -375,12 +305,62 @@ public class MovitaStepdefs extends BaseMovita {
             Assert.assertNotEquals(beforeColorMainTitle, afterColorMainTitle);
         }*/
 
-        Move_12  smokeTest = new Move_12();
+        Move_12 smokeTest = new Move_12();
         smokeTest.mov_12_changeColor(subtitle);
     }
+    @When("user hover over the ınstituonal title")
+    public void userHoverOverTheInstituonalTitle() {
+
+        hoverOver(homePageMenu("Kurumsal"));
+
+    }
+    @And("user clicks to about us title")
+    public void userClicksToAboutUsTitle() {
+        click( MainSubtitle("Hakkımızda"));
+    }
+    @And("user verify to heading block")
+    public void userVerifyToHeadingBlock(DataTable table) {
+        scroll();
+
+        /*List<WebElement> elements = driver.findElements(By.xpath("//section[@id='content']//h4"));
+        for (WebElement element : elements) {
+            visible(element);
+
+        }*/
+
+        List<String> list = table.asList();
+        for (String s : list) {
+            visible(Move_20.headingBlocks(s));
+        }
+        // visible(Move_20_smokeTest.headingBlocks(headingBlock));
+
+    }
+
+    @And("user hover over the arrow icons color should be changable")
+    public void userHoverOverTheArrowIconsColorShouldBeChangable() {
+        bekle(500);
+        // scroll();
+        //changeColor("click","background-color",Move_20.lIcon);
+        String beforeColor =driver.findElement(Move_20.lIcon).getCssValue("background-color");
+        bekle(200);
+        hoverOver(driver.findElement(Move_20.lIcon));
+        String afterColor = driver.findElement(Move_20.lIcon).getCssValue("color");
+        Assert.assertNotEquals(beforeColor,afterColor);
+
+    }
+    @And("user click to arrow icons the turn back to about us page")
+    public void userClickToArrowIconsTheTurnBackToAboutUsPage() {
+        // scroll();
+        /*JavascriptExecutor js = ((JavascriptExecutor) driver);
+        js.executeScript("window.scrollBy(500, 500)");*/
+        click(Move_20.lIcon);
+        visible(llogo);
+    }
+
+
+
+
+
+
+
 }
-
-
-
-
-
