@@ -9,20 +9,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import pageObjects.Mov_10;
-import pageObjects.Move_12;
-import pageObjects.Move_124;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import static pageObjects.Mov_10.lRaporlarMenu;
-import static pageObjects.Mov_10.lVerifyMap;
 
 public class MovitaStepdefs extends BaseMovita {
 
@@ -49,10 +40,10 @@ public class MovitaStepdefs extends BaseMovita {
     @And("user clicks the english language button")
     public void userClicksTheEnglishLanguageButton() {
         click(lLangButton);
-        bekle(500);
-        //new Actions(driver).moveToElement(driver.findElement(lEnglishLangNew)).click();
-        click(lEnglishLang);
 
+        new Actions(driver).moveToElement(driver.findElement(lEnglishLang)).click();
+
+        // click(lEnglishLang);
     }
 
     @And("user String verify English → “Mobile Vehicle Tracking System” yazisini verify et")
@@ -118,17 +109,4 @@ public class MovitaStepdefs extends BaseMovita {
     }
 
 
-    @And("user clicks to alarm operations and verify")
-    public void userClicksToAlarmOperationsAndVerify() {
-        click(Move_124.lAlarmButton);
-        bekle(500);
-        visible(Move_124.lVerifyAlarmPage);
-
-    }
 }
-
-
-
-
-
-

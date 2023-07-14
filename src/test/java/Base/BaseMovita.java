@@ -299,4 +299,10 @@ public class BaseMovita implements Locator {
                 break;
         }
     }
+    public void inVisible(WebElement element) {
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+    public void inVisible(By locator) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
 }
